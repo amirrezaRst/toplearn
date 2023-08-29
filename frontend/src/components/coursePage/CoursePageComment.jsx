@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentPagination from './CommentPagination';
+import CommentPagination from '../common/Pagination';
 import SingleUserComment from './SingleUserComment';
 
 

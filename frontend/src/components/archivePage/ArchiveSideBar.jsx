@@ -5,7 +5,7 @@ const ArchiveSideBar = () => {
     return (
         <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-            <section class="aside-section filter-by-price">
+            <section class="aside-section filter-by-price" style={{ borderRadius: "5px" }}>
                 <header><h3> فیلتر بر اساس قیمت </h3></header>
                 <div class="price-range">
                     <input type="hidden" value="" id="min-value" name="min_price" />
@@ -17,7 +17,7 @@ const ArchiveSideBar = () => {
                 </div>
             </section>
 
-            <section class="aside-section filter-by-category">
+            <section class="aside-section filter-by-category" style={{ borderRadius: "5px" }}>
                 <header><h3> دسته بندی موضوعات </h3></header>
                 <div class="inner">
                     <ul>

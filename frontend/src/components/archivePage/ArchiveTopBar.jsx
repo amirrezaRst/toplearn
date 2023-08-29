@@ -14,7 +14,7 @@ const ArchiveTopBar = () => {
                     </ul>
                 </nav>
             </div>
-            <div class="top-bar">
+            <div class="top-bar" style={{borderRadius:"5px"}}>
 
                 <header><h1> دوره های <span> برنامه نویسی وب </span> </h1> <span> 123 دوره </span></header>
 

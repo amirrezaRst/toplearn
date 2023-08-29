@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const CommentPagination = () => {
+const Pagination = () => {
     return (
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
@@ -23,4 +23,4 @@ const CommentPagination = () => {
     );
 }
 
-export default CommentPagination;
+export default Pagination;
