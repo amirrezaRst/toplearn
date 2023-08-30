@@ -2,3 +2,6 @@
 /frontend/public/bootstrap-4.0.0
 /frontend/public/bootstrap-v4-rtl
 /frontend/public/fontawesome-pro-6.1.1-web
+
+/backend/node_modules
+/backend/public/profile
