@@ -18,6 +18,8 @@ const app = express().use(cors()).use(express.json());
 app.use(express.static(path.join(__dirname, "public", "profile/")))
 
 
+//! routes
+app.use("/api/user", require("./routes/userRoutes"));
 
 
 app.listen(process.env.PORT, err => {
