@@ -14,4 +14,4 @@ const userSchema = mongoose.Schema({
     expireData: { type: Date },
 })
 
-exports.userModel = mongoose.model("users", userSchema)
+exports.userModel = mongoose.model("users", userSchema);
