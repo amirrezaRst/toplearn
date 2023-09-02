@@ -17,11 +17,13 @@ const app = express().use(cors()).use(express.json());
 //! static folder
 app.use(express.static(path.join(__dirname, "public", "profile/")))
 app.use(express.static(path.join(__dirname, "public", "teacher/")))
+app.use(express.static(path.join(__dirname, "public", "cover/")))
 
 
 //! routes
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/teacher", require("./routes/teacherRoutes"));
+app.use("/api/course", require("./routes/courseRoutes"));
 
 
 app.listen(process.env.PORT, err => {

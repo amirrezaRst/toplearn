@@ -10,6 +10,7 @@ const episodeSchema = mongoose.Schema({
 const courseSchema = mongoose.Schema({
     title: { type: String, require: true },
     teacher: { type: mongoose.Schema.Types.ObjectId, ref: "teachers" },
+    cover: { type: String },
     description: { type: String, require: true },
     prerequisite: [{ type: String }],
     price: { type: Number, require: true },
@@ -21,4 +22,6 @@ const courseSchema = mongoose.Schema({
     courses: [episodeSchema],
     courseStatus: { type: String, enum: ["started", "finished"], default: "started" },
     lastUpdate: { type: Date, default: Date.now },
-}) 
+});
+
+exports.courseModel = mongoose.model("courses", courseSchema);

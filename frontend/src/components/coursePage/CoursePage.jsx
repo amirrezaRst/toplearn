@@ -36,7 +36,8 @@ const CoursePage = () => {
                                     </div>
 
                                 </header>
-                                <img src="/images/pic/big-thumb.jpg" style={{ borderRadius: "10px" }} />
+                                {/* <img src="/images/pic/big-thumb.jpg" style={{ borderRadius: "10px" }} /> */}
+                                <img src="/images/pic/9.jpg" style={{ borderRadius: "10px" }} />
 
                                 <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
                                 <p>
