@@ -369,6 +369,7 @@ footer .top-footer {
 }
 
 .client-page {
+  background: #F3F7FA url("/images/pattern.png");
   width: 100%;
   padding: 100px 0;
 }
@@ -390,9 +391,29 @@ footer .top-footer {
 }
 
 .client-page .container-content .input-group-addon {
+  background: #fff !important;
+  border-left: none;
+  color: #D4DEE3;
   width: 55px;
-  font-size: 18px
+  font-size: 23px !important;
 }
+
+/* .client-page .container-content .input-group-addon::before {
+  font-family: "Font Awesome 6 Pro" !important;
+  content: "\f1b9" !important;
+} */
+
+.client-page .container-content .input-group-addon+input {
+  border-right: none !important;
+  padding: 25px 0 !important;
+}
+
+.client-page .container-content .input-group-addon+input:focus {
+  outline: none !important;
+  border-color: #ccc !important;
+  box-shadow: none !important;
+}
+
 
 .client-page .container-content .form-control {
   height: 40px
@@ -1486,7 +1507,8 @@ main#home-page {
   /* align-items: center; */
   border-radius: 10px;
 }
-.share-layer span{
+
+.share-layer span {
   font-size: 1.7rem !important;
 }
 
@@ -1501,6 +1523,49 @@ main#home-page {
   border-radius: 100px;
   cursor: pointer;
 }
-.share-button i{
+
+.share-button i {
   font-size: 1.8rem !important;
 }
+
+/*? register page */
+#register-container {
+  background: #F3F7FA url("/images/pattern.png");
+}
+
+.register-card {
+  background: #fff;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: 6px;
+  width: 55%;
+  margin: 80px auto;
+  padding: 40px 20px;
+}
+
+.register-card p {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.register-logo {
+  width: 23%;
+}
+
+.register-card form {
+  width: 80%;
+  margin: 40px auto 0 auto;
+  font-family: sans-serif
+}
+
+
+
+
+/* #special-text {
+  color: red;
+  font-size: 3rem !important;
+}
+
+#special-text::before {
+  font-family: "Font Awesome 6 Pro";
+  content: "\f1b9";
+} */
