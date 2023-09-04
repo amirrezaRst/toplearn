@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 
 const SingUp = () => {
@@ -8,9 +9,9 @@ const SingUp = () => {
             <main class="client-page">
                 <div class="container-content">
 
-                    <header style={{textAlign:"center",marginTop:"10px"}}>
+                    <header style={{ textAlign: "center", marginTop: "10px" }}>
                         <img src="/images/logo3.png" className='register-logo' alt="" />
-                        <h2 style={{fontSize:"1.9rem"}}> عضویت در سایت </h2>
+                        <h2 style={{ fontSize: "1.9rem" }}> عضویت در سایت </h2>
                     </header>
 
                     <div class="form-layer">
@@ -37,11 +38,11 @@ const SingUp = () => {
                             </div>
 
                             <div class="link">
-                                <a href=""> <i class="zmdi zmdi-assignment"></i> قوانین و مقررات سایت !</a>
-                                <a href=""> <i class="zmdi zmdi-account"></i> ورود به سایت </a>
+                                <Link href=""> <i class="zmdi zmdi-assignment"></i> قوانین و مقررات سایت !</Link>
+                                <Link to="/LogIn"> <i class="zmdi zmdi-account"></i> ورود به سایت </Link>
                             </div>
 
-                            <button class="btn btn-success btn-block" style={{margin:"15px 0",padding:"12px 0",background:"#00bffe"}}> عضویت در سایت </button>
+                            <button class="btn btn-success btn-block" style={{fontSize:"1.65rem", margin: "15px 0", padding: "10px 0", background: "#00bffe" }}> عضویت در سایت </button>
 
                         </form>
                     </div>

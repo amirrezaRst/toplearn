@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router';
+import { Link } from "react-router-dom";
 
 
 
@@ -8,19 +8,13 @@ const LogIn = () => {
     return (
         <React.Fragment>
 
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">تاپ لرن</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">ورود به سایت</li>
-                    </ul>
-                </nav>
-            </div>
-
             <main class="client-page">
                 <div class="container-content">
 
-                    <header><h2> ورود به سایت </h2></header>
+                    <header style={{ textAlign: "center", marginTop: "10px" }}>
+                        <img src="/images/logo3.png" className='register-logo' alt="" />
+                        <h2 style={{ fontSize: "1.9rem" }}> ورود به سایت </h2>
+                    </header>
 
                     <div class="form-layer">
 
@@ -36,16 +30,12 @@ const LogIn = () => {
                                 <input type="text" class="form-control" placeholder="رمز عبور " aria-describedby="password" />
                             </div>
 
-                            <div class="remember-me">
-                                <label><input type="checkbox" name="" />  مرا بخاطر بسپار </label>
-                            </div>
-
                             <div class="link">
-                                <a href=""> <i class="zmdi zmdi-lock"></i> رمز عبور خود را فراموش کرده ام !</a>
-                                <a href=""> <i class="zmdi zmdi-account"></i> عضویت در سایت </a>
+                                <Link href=""> <i class="zmdi zmdi-assignment"></i> قوانین و مقررات سایت !</Link>
+                                <Link to="/signUp"> <i class="zmdi zmdi-account"></i> ثبت نام در سایت </Link>
                             </div>
 
-                            <button class="btn btn-success"> ورود به سایت </button>
+                            <button class="btn btn-success btn-block" style={{fontSize:"1.65rem", margin: "15px 0", padding: "10px 0", background: "#00bffe" }}> ورود </button>
 
                         </form>
                     </div>
