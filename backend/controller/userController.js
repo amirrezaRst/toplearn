@@ -27,14 +27,11 @@ exports.singleUser = async (req, res) => {
 //! Post Request
 exports.register = async (req, res) => {
     if (registerValidation(req.body).error) return res.status(422).json({ text: registerValidation(req.body).error.message });
-    // const schema = Joi.object({
-    //     fullName: Joi.string().required().trim().min(3).max(100),
-    //     phone: Joi.string().required().trim().min(11).max(11),
-    //     email: Joi.string().required().trim(),
-    //     password: Joi.string().required().trim()
-    // })
 
-    // if (schema.validate(req.body).error) return res.status(422).json({ text: schema.validate(req.body).error.message });
+    const user = await userModel.findOne({ email: req.body.email });
+    if (user) {
+        return res.status(422).json({ status: 422, text: "Registered email" });
+    }
 
     const newUser = new userModel({
         fullName: req.body.fullName,
@@ -51,10 +48,10 @@ exports.login = async (req, res) => {
     if (loginValidation(req.body).error) return res.status(422).json({ text: loginValidation(req.body).error.message });
 
     const user = await userModel.findOne({ email: req.body.email });
-    if (!user) return res.status(422).json({ text: "email or password is not valid" });
+    if (!user) return res.status(422).json({ status: 422, text: "email or password is not valid" });
 
-    const verifyPassword = bcrypt.compareSync(req.password, user.password);
-    if (!verifyPassword) return res.status(422).json({ text: "email or password is not valid" });
+    const verifyPassword = bcrypt.compareSync(req.body.password, user.password);
+    if (!verifyPassword) return res.status(422).json({ status: 422, text: "email or password is not valid" });
 
     const tokenData = {
         id: user._id,

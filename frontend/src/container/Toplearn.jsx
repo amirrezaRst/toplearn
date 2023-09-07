@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Switch } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, Switch } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 import MainLayout from '../components/layouts/MainLayout';
 import Home from '../components/homePage/Home';
@@ -9,26 +10,53 @@ import Archive from '../components/archivePage/Archive';
 import Profile from '../components/profilePage/Profile';
 import EditProfile from '../components/profilePage/EditProfile';
 import CoursePage from '../components/coursePage/CoursePage';
+import ContextApi from '../services/ContextApi';
+import axios from "axios";
 
+import config from "../services/config.json";
 
 const Toplearn = () => {
+
+    const [userData, setUserData] = useState({});
+    const [userLogin, setUserLogin] = useState(false);
+    const [courses, setCourses] = useState([]);
+
+    const courseApi = async () => {
+        await axios.get(`${config.domain}/api/course/courseList`).then(res => {
+            setCourses(res.data.courses);
+        }).catch(err => {
+            toast.error(`A problem occurred on the server side, please try again`, {
+                position: "bottom-right",
+                theme: "light",
+                closeOnClick: true
+            })
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        courseApi();
+    }, [])
+
     return (
 
-        <MainLayout>
+        <ContextApi.Provider value={{ userData, setUserData, userLogin, setUserLogin, courses, setCourses }}>
+            <MainLayout>
 
-            <Switch>
+                <Routes>
+                    <Route path="/" exact element={<Home courses={courses} />} />
+                    <Route path="/signUp" element={<SingUp />} />
+                    <Route path="/logIn" element={<LogIn />} />
+                    <Route path="/archive" element={<Archive />} />
+                    <Route path="/course/*" element={<CoursePage />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/editProfile" element={<EditProfile />} />
+                </Routes>
+                <ToastContainer />
 
-                <Route path="/" exact ><Home /></Route>
-                <Route path="/signUp" ><SingUp /></Route>
-                <Route path="/logIn" ><LogIn /></Route>
-                <Route path="/archive" ><Archive /></Route>
-                <Route path="/singleCourse/" ><CoursePage /></Route>
-                <Route path="/profile" ><Profile /></Route>
-                <Route path="/editProfile" ><EditProfile /></Route>
 
-            </Switch>
-
-        </MainLayout>
+            </MainLayout>
+        </ContextApi.Provider>
 
     );
 }

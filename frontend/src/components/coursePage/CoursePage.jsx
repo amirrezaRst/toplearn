@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../common/Breadcrumb';
 import CoursePageComment from './CoursePageComment';
 import CourseInformation from "./CourseInformation";
@@ -6,8 +6,34 @@ import CourseSinglePart from './CourseSinglePart';
 import CourseTags from "./CourseTags";
 import CourseShare from "./CourseShare"
 import TeacherResume from './TeacherResume';
+import ShortUrl from './ShortUrl';
+import axios from 'axios';
+import config from "../../services/config.json";
+import { useLocation } from 'react-router';
 
 const CoursePage = () => {
+
+    const [courseData, setCourseData] = useState();
+    const location = useLocation().pathname.split("/")[2]
+
+
+    const courseApi = async () => {
+        await axios.get(`${config.domain}/api/course/singleCourse/${location}`).then(res => {
+            console.log(res.data.course);
+            setCourseData(res.data.course);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        courseApi();
+    }, [])
+
+    const result = () => {
+        console.log(courseData);
+    }
+
     return (
 
         <React.Fragment>
@@ -17,27 +43,19 @@ const CoursePage = () => {
             <div class="container">
                 <section class="term-content">
                     <div class="row">
+                        <button className="btn btn-primary" onClick={result}>Result</button>
 
                         <div class="col-md-8 col-sm-12 col-xs-12 pull-left">
                             <section class="term-description" style={{ borderRadius: "10px" }}>
-                                <header>
+                                {courseData ?
+                                    <ShortUrl title={courseData.title} id={courseData.shortUrl} />
+                                    : null
+                                }
 
-                                    <h1 style={{ fontSize: "2rem" }}> دوره آموزشی ساخت ربات تلگرام </h1>
-                                    <div className="url-copy">
-
-                                        <div className="" style={{ color: "#686371" }}>
-                                            <span style={{ marginLeft: "14px", fontSize: "1.5rem" }}>لینک کوتاه</span>
-                                            <span style={{ fontFamily: "sans-serif" }}>https://toplearn.com/c/59376</span>
-                                        </div>
-                                        <div id='url-copy-btn' style={{ borderRight: "1px solid #d6d9db" }}>
-                                            <i class="fal fa-copy"></i>
-                                        </div>
-
-                                    </div>
-
-                                </header>
-                                {/* <img src="/images/pic/big-thumb.jpg" style={{ borderRadius: "10px" }} /> */}
-                                <img src="/images/pic/9.jpg" style={{ borderRadius: "10px" }} />
+                                {courseData ?
+                                    <img src={`${config.domain}/${courseData.cover}`} style={{ borderRadius: "10px" }} />
+                                    : null
+                                }
 
                                 <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
                                 <p>
@@ -60,13 +78,23 @@ const CoursePage = () => {
 
                         <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
 
-                            <TeacherResume />
+                            {courseData ?
+                                <TeacherResume id={courseData.teacher._id} fullName={courseData.teacher.fullName} image={courseData.teacher.pic} />
+                                : null
+                            }
 
-                            <CourseInformation />
+                            {courseData ?
+                                <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courseTime={courseData.courseTime}
+                                    courses={courseData.courses} price={courseData.price} discount={courseData.discount} student={courseData.student} />
+                                : null
+                            }
 
                             <button className="btn" id='favorite-course'>افزودن به علاقه مندی ها <i className="fa fa-heart"></i></button>
 
-                            <CourseTags />
+                            {courseData ?
+                                <CourseTags tags={courseData.tags} />
+                                : null
+                            }
 
                             <CourseShare />
 

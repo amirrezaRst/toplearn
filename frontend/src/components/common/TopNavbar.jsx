@@ -31,13 +31,13 @@ const TopNavbar = () => {
                             </div>
                             <div className="col-sm-6 col-xs-12">
                                 <div className="clientarea">
-                                    <div className="loggein ">
+                                    {/* <div className="loggein ">
                                         <i className="zmdi zmdi-account"></i><a href=""> ایمان مدائنی ، خوش آمدی </a>
-                                    </div>
-                                    <div className="signin hidden">
-                                        <i className="zmdi zmdi-account"></i>
-                                        <a href=""> ورود </a> /
-                                        <a href=""> عضویت </a>
+                                    </div> */}
+                                    <div className="signin" style={{fontSize:"1.6rem"}}>
+                                        <i className="far fa-user" style={{ fontSize: "1.7rem" }}></i>
+                                        <Link to="/logIn"> ورود </Link> /
+                                        <Link to="/signUp"> عضویت </Link>
                                     </div>
                                 </div>
                             </div>

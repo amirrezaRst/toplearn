@@ -410,7 +410,7 @@ footer .top-footer {
 
 .client-page .container-content .input-group-addon+input:focus {
   outline: none !important;
-  border-color: #ccc !important;
+  /* border-color: #ccc !important; */
   box-shadow: none !important;
 }
 
@@ -1558,14 +1558,8 @@ main#home-page {
 }
 
 
-
-
-/* #special-text {
-  color: red;
-  font-size: 3rem !important;
+.register-form-message {
+  color: rgb(219, 0, 0);
+  margin-bottom: 8px;
+  margin-top: 0;
 }
-
-#special-text::before {
-  font-family: "Font Awesome 6 Pro";
-  content: "\f1b9";
-} */
