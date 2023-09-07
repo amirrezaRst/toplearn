@@ -25,7 +25,7 @@ const Toplearn = () => {
         await axios.get(`${config.domain}/api/course/courseList`).then(res => {
             setCourses(res.data.courses);
         }).catch(err => {
-            toast.error(`A problem occurred on the server side, please try again`, {
+            toast.error(`مشکلی سمت سرور رخ داده ، لطفا بعدا امتحان کنید`, {
                 position: "bottom-right",
                 theme: "light",
                 closeOnClick: true
@@ -34,14 +34,32 @@ const Toplearn = () => {
         })
     }
 
+    const userApi = async () => {
+        const id = localStorage.getItem("userId");
+
+        await axios.get(`${config.domain}/api/user/singleuser/${id}`).then(res => {
+            // console.log(res);
+            setUserData(res.data.user)
+            setUserLogin(true);
+        }).catch(err => {
+            toast.error(`مشکلی سمت سرور رخ داده ، لطفا بعدا امتحان کنید`, {
+                position: "bottom-right",
+                theme: "light",
+                closeOnClick: true
+            });
+            console.log(err);
+        })
+    }
+
     useEffect(() => {
         courseApi();
+        if (localStorage.getItem("userId")) return userApi();
     }, [])
 
     return (
 
         <ContextApi.Provider value={{ userData, setUserData, userLogin, setUserLogin, courses, setCourses }}>
-            <MainLayout>
+            <MainLayout userData={userData} userLogin={userLogin}>
 
                 <Routes>
                     <Route path="/" exact element={<Home courses={courses} />} />

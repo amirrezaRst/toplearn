@@ -3,11 +3,12 @@ import { Link, NavLink, useLocation } from "react-router-dom"
 import HomeHeader from '../homePage/HomeHeader';
 
 
-const TopNavbar = () => {
-    const location = useLocation().pathname
+const TopNavbar = ({ userData, userLogin }) => {
+    const location = useLocation().pathname;
 
     const result = () => {
-        console.log(location);
+        console.log(userLogin);
+        console.log(userData);
     }
 
     return (
@@ -25,20 +26,24 @@ const TopNavbar = () => {
                                         <NavLink to="/aboutUs" activeStyle={{ color: "#20991d" }} > درباره ما </NavLink>
                                         <NavLink to="/ContactUs" activeStyle={{ color: "#20991d" }} > تماس با ما </NavLink>
                                         <span style={{ color: "#fff", fontSize: "1.7rem", marginRight: "20px", cursor: "pointer" }}> <i class="fa-regular fa-magnifying-glass"></i></span>
-                                        {/* <div><button className="btn btn-success" onClick={result}>Result</button> </div> */}
+                                        <div><button className="btn btn-success" onClick={result}>Result</button> </div>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col-sm-6 col-xs-12">
                                 <div className="clientarea">
-                                    {/* <div className="loggein ">
-                                        <i className="zmdi zmdi-account"></i><a href=""> ایمان مدائنی ، خوش آمدی </a>
-                                    </div> */}
-                                    <div className="signin" style={{fontSize:"1.6rem"}}>
-                                        <i className="far fa-user" style={{ fontSize: "1.7rem" }}></i>
-                                        <Link to="/logIn"> ورود </Link> /
-                                        <Link to="/signUp"> عضویت </Link>
-                                    </div>
+
+                                    {userData && userLogin == true ?
+                                        <div className="loggein ">
+                                            <i className="zmdi zmdi-account"></i><Link style={{fontSize:"1.7rem"}} to="/"> {userData.fullName} </Link>
+                                        </div> :
+                                        <div className="signin" style={{ fontSize: "1.6rem" }}>
+                                            <i className="far fa-user" style={{ fontSize: "1.7rem" }}></i>
+                                            <Link to="/logIn"> ورود </Link> /
+                                            <Link to="/signUp"> عضویت </Link>
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
                         </div>

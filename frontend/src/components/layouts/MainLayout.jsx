@@ -5,12 +5,12 @@ import MainNavbar from '../common/MainNavbar';
 import TopNavbar from '../common/TopNavbar';
 
 
-const MainLayout = ({ children }) => {
-    
+const MainLayout = ({ children, userData, userLogin }) => {
+
     return (
         <React.Fragment>
 
-            <TopNavbar />
+            <TopNavbar userData={userData} userLogin={userLogin} />
             <MainNavbar />
 
             {children}
