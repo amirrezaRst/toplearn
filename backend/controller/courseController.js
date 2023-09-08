@@ -15,12 +15,27 @@ exports.courseList = async (req, res) => {
 }
 
 exports.singleCourse = async (req, res) => {
-    if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
+    // if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
 
-    const course = await courseModel.findById(req.params.id).populate("teacher");
-    if (!course) return res.status(422).json({ text: "user not found" });
+    // const course2 = await courseModel.findOne({ shortUrl: req.params.id }).populate("teacher");
+    // const course = await courseModel.findById(req.params.id).populate("teacher");
 
-    res.json({ text: "fetch success", course });
+    // if (!course && course2) return res.status(422).json({ status: 422, text: "user not found" });
+    // // if (!course) return res.status(422).json({ text: "user not found" });
+
+    // res.json({ text: "fetch success", course });
+
+    const fetchShort = await courseModel.findOne({ shortUrl: req.params.id }).populate("teacher");
+    if (!fetchShort) {
+        if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
+        const course = await courseModel.findById(req.params.id).populate("teacher");
+        if (!course) return res.status(422).json({ text: "user not found" })
+
+        return res.json({text:'fetch success',course})
+    }
+    else{
+        res.json({text:"fetch success",course:fetchShort})
+    }
 }
 
 

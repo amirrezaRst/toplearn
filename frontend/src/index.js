@@ -7,6 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 // import "./css/style.css"
 // import "./css/all.min.css"
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'react-tooltip/dist/react-tooltip.css'
 
 render(<BrowserRouter><App /></BrowserRouter>, document.getElementById("root"))
