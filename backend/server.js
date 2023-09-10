@@ -18,6 +18,7 @@ const app = express().use(cors()).use(express.json());
 app.use(express.static(path.join(__dirname, "public", "profile/")))
 app.use(express.static(path.join(__dirname, "public", "teacher/")))
 app.use(express.static(path.join(__dirname, "public", "cover/")))
+app.use(express.static(path.join(__dirname, "public", "courses/")))
 
 
 //! routes

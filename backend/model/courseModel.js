@@ -4,6 +4,7 @@ const shortid = require('shortid');
 const episodeSchema = mongoose.Schema({
     title: { type: String, require: true },
     time: { type: Number, require: true },
+    free: { type: Boolean, default: true },
     url: { type: String, require: true }
 });
 

@@ -1,5 +1,6 @@
 const { isValidObjectId } = require('mongoose');
 const multer = require('multer');
+const path = require('path');
 const sharp = require('sharp');
 const shortid = require('shortid');
 const { courseModel } = require('../model/courseModel');
@@ -15,26 +16,16 @@ exports.courseList = async (req, res) => {
 }
 
 exports.singleCourse = async (req, res) => {
-    // if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
-
-    // const course2 = await courseModel.findOne({ shortUrl: req.params.id }).populate("teacher");
-    // const course = await courseModel.findById(req.params.id).populate("teacher");
-
-    // if (!course && course2) return res.status(422).json({ status: 422, text: "user not found" });
-    // // if (!course) return res.status(422).json({ text: "user not found" });
-
-    // res.json({ text: "fetch success", course });
-
     const fetchShort = await courseModel.findOne({ shortUrl: req.params.id }).populate("teacher");
     if (!fetchShort) {
         if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
         const course = await courseModel.findById(req.params.id).populate("teacher");
         if (!course) return res.status(422).json({ text: "user not found" })
 
-        return res.json({text:'fetch success',course})
+        return res.json({ text: 'fetch success', course })
     }
-    else{
-        res.json({text:"fetch success",course:fetchShort})
+    else {
+        res.json({ text: "fetch success", course: fetchShort })
     }
 }
 
@@ -104,6 +95,87 @@ exports.createCourse = async (req, res) => {
     })
 }
 
+
+//? course parts
+exports.addEpisode = async (req, res) => {
+    // const videoStorage = multer.diskStorage({
+    //     destination: 'public/courses',
+    //     filename: (req, file, cb) => {
+    //         cb(null, `course_e2_${shortid.generate()}${path.extname(file.originalname)}`)
+    //     }
+    // });
+
+    // const upload = multer({
+    //     storage: videoStorage,
+    //     limits: {
+    //         fileSize: 10000000 // 10000000 Bytes = 10 MB
+    //     },
+    //     fileFilter(req, file, cb) {
+    //         // upload only mp4 and mkv format
+    //         if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
+    //             return cb(new Error('Please upload a video'))
+    //         }
+    //         cb(undefined, true)
+    //     }
+    // }).single("video");
+    const upload = multer({
+        limits: {
+            fileSize: 10000000 // 10000000 Bytes = 10 MB
+        },
+        fileFilter(req, file, cb) {
+            // upload only mp4 and mkv format
+            if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
+                return cb(new Error('Please upload a video'))
+            }
+            cb(undefined, true)
+        }
+    }).single("video");
+
+
+    upload(req, res, async (err) => {
+        if (err) {
+            if (err.code === "LIMIT_FILE_SIZE") {
+                return res
+                    .status(422)
+                    .json({ text: "The size of the photo should not be more than 10 MB" });
+            }
+            res.status(422).send(err);
+        }
+        else {
+            if (req.file) {
+                const fileName = `course_${shortid.generate()}_${req.file.originalname}`;
+                await sharp(req.file.buffer)
+                    .jpeg({
+                        quality: 70,
+                    })
+                    .resize(700, 450)
+                    .toFile(`./public/cover/${fileName}`)
+                    .catch((err) => console.log(err));
+
+                if (createValidation(req.body).error) return res.status(422).json({ text: createValidation(req.body).error.message });
+
+                const newCourse = new courseModel({
+                    title: req.body.title,
+                    teacher: req.body.teacher,
+                    description: req.body.description,
+                    prerequisite: req.body.prerequisite,
+                    price: req.body.price,
+                    discount: req.body.discount,
+                    courseLevel: req.body.courseLevel,
+                    tags: req.body.tags
+                })
+
+                newCourse.cover = fileName;
+
+                await newCourse.save();
+
+                res.status(201).json({ message: "course created", course: newCourse });
+            } else {
+                res.status(422).json({ message: "Photo is required, please enter it" });
+            }
+        }
+    })
+}
 
 
 
