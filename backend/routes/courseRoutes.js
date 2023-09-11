@@ -11,7 +11,7 @@ router.get("/courseList", courseList);
 router.get("/singleCourse/:id", singleCourse);
 
 router.post("/newCourse", [Auth, AdminAuth], createCourse);
-router.post("/newEpisode",[Auth,AdminAuth],addEpisode);
+router.post("/newEpisode/:id",[Auth,AdminAuth],addEpisode);
 
 router.delete("/deleteCourse/:id", [Auth, AdminAuth], deleteCourse);
 

@@ -19,8 +19,8 @@ exports.createValidation = (data) => {
 exports.newEpisodeValidation = (data) => {
     const schema = joi.object({
         title: joi.string().required(),
-        TimeRanges: joi.number().required(),
-        free: joi.boolean().default("free"),
+        time: joi.number(),
+        free: joi.boolean().default("free").valid("purchase", "free"),
         video: joi.string()
     });
     return schema.validate(data);

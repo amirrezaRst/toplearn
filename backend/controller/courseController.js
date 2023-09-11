@@ -4,8 +4,9 @@ const path = require('path');
 const sharp = require('sharp');
 const shortid = require('shortid');
 const { courseModel } = require('../model/courseModel');
-const { createValidation } = require('./validation/courseValidation');
-
+const { createValidation, newEpisodeValidation } = require('./validation/courseValidation');
+const fs = require('fs');
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 //! Get Request
 exports.courseList = async (req, res) => {
@@ -98,34 +99,27 @@ exports.createCourse = async (req, res) => {
 
 //? course parts
 exports.addEpisode = async (req, res) => {
-    // const videoStorage = multer.diskStorage({
-    //     destination: 'public/courses',
-    //     filename: (req, file, cb) => {
-    //         cb(null, `course_e2_${shortid.generate()}${path.extname(file.originalname)}`)
-    //     }
-    // });
+    if (!isValidObjectId(req.params.id)) return res.status(422).json({ status: 422, text: "id is not valid" });
 
-    // const upload = multer({
-    //     storage: videoStorage,
-    //     limits: {
-    //         fileSize: 10000000 // 10000000 Bytes = 10 MB
-    //     },
-    //     fileFilter(req, file, cb) {
-    //         // upload only mp4 and mkv format
-    //         if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
-    //             return cb(new Error('Please upload a video'))
-    //         }
-    //         cb(undefined, true)
-    //     }
-    // }).single("video");
+    const course = await courseModel.findById(req.params.id);
+    if (!course) return res.status(422).json({ status: 422, text: "course not found" });
+
+    const videoStorage = multer.diskStorage({
+        destination: 'public/courses',
+        filename: (req, file, cb) => {
+            cb(null, `course_e${course.courses.length + 1}_${shortid.generate()}${path.extname(file.originalname)}`)
+        }
+    });
+
     const upload = multer({
+        storage: videoStorage,
         limits: {
             fileSize: 10000000 // 10000000 Bytes = 10 MB
         },
         fileFilter(req, file, cb) {
             // upload only mp4 and mkv format
             if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
-                return cb(new Error('Please upload a video'))
+                return cb(new Error('Please upload a video'));
             }
             cb(undefined, true)
         }
@@ -143,35 +137,24 @@ exports.addEpisode = async (req, res) => {
         }
         else {
             if (req.file) {
-                const fileName = `course_${shortid.generate()}_${req.file.originalname}`;
-                await sharp(req.file.buffer)
-                    .jpeg({
-                        quality: 70,
-                    })
-                    .resize(700, 450)
-                    .toFile(`./public/cover/${fileName}`)
-                    .catch((err) => console.log(err));
+                if (newEpisodeValidation(req.body).error) return res.status(422).json({ status: 422, text: newEpisodeValidation(req.body).error.message });
 
-                if (createValidation(req.body).error) return res.status(422).json({ text: createValidation(req.body).error.message });
-
-                const newCourse = new courseModel({
+                var newEpisode = {
                     title: req.body.title,
-                    teacher: req.body.teacher,
-                    description: req.body.description,
-                    prerequisite: req.body.prerequisite,
-                    price: req.body.price,
-                    discount: req.body.discount,
-                    courseLevel: req.body.courseLevel,
-                    tags: req.body.tags
+                    free: req.body.free,
+                    video: req.file.filename
+                };
+
+                await getVideoDurationInSeconds(path.join(__dirname, "../", "public", "courses", req.file.filename)).then((duration) => {
+                    newEpisode.time = Math.floor(duration);
                 })
 
-                newCourse.cover = fileName;
+                course.courses.push(newEpisode);
+                await course.save();
 
-                await newCourse.save();
-
-                res.status(201).json({ message: "course created", course: newCourse });
+                res.status(201).json({ message: "episode added to courses" });
             } else {
-                res.status(422).json({ message: "Photo is required, please enter it" });
+                res.status(422).json({ status: 422, message: "video is required, please enter it" });
             }
         }
     })

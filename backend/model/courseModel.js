@@ -5,7 +5,7 @@ const episodeSchema = mongoose.Schema({
     title: { type: String, require: true },
     time: { type: Number, require: true },
     free: { type: Boolean, default: true },
-    url: { type: String, require: true }
+    video: { type: String, require: true }
 });
 
 const courseSchema = mongoose.Schema({
@@ -16,7 +16,6 @@ const courseSchema = mongoose.Schema({
     prerequisite: [{ type: String }],
     price: { type: Number, require: true },
     discount: { type: Number, default: 0 },
-    courseTime: { type: Number, default: 0 },
     courseLevel: { type: String, enum: ["basic", "middle", "advance"], require: true },
     student: { type: Number, default: 0 },
     shortUrl: { type: String, default: shortid.generate() },
