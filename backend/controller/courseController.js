@@ -30,6 +30,15 @@ exports.singleCourse = async (req, res) => {
     }
 }
 
+exports.downloadEpisode = async (req, res) => {
+    const file = path.join(__dirname, "../", "public", "courses", req.params.url);
+    fs.readFile(file, ({}), (filename, buff) => {
+        if (buff == undefined) return res.status(422).json({ status: 404, text: "file not found" });
+    });
+    
+    res.download(file);
+}
+
 
 //! Post Request
 exports.createCourse = async (req, res) => {
@@ -141,6 +150,7 @@ exports.addEpisode = async (req, res) => {
 
                 var newEpisode = {
                     title: req.body.title,
+                    description: req.body.description,
                     free: req.body.free,
                     video: req.file.filename
                 };

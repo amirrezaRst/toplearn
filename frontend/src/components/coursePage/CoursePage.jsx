@@ -66,7 +66,12 @@ const CoursePage = () => {
 
                                 <ul>
 
-                                    <CourseSinglePart />
+                                    {courseData ?
+                                        courseData.courses.map(item =>
+                                            <CourseSinglePart title={item.title} description={item.description} free={item.free} second={item.time} url={item.video} />
+                                        )
+                                        : null
+                                    }
 
                                 </ul>
 
@@ -84,8 +89,8 @@ const CoursePage = () => {
                             }
 
                             {courseData ?
-                                <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courseTime={courseData.courseTime}
-                                    courses={courseData.courses} price={courseData.price} discount={courseData.discount} student={courseData.student} />
+                                <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
+                                    price={courseData.price} discount={courseData.discount} student={courseData.student} />
                                 : null
                             }
 

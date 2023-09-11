@@ -953,18 +953,56 @@ main#home-page {
   text-align: justify;
 }
 
-.term-content .term-description ul li {
+/*! Edited */
+.term-content .term-description ul li {}
+
+.episode-content {
   width: 100%;
-  border: 1px solid #ebebeb;
-  padding: 15px;
   background-color: #fff;
-  margin-bottom: 15px
+  padding: 15px;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.episode-information {
+  margin-top: 25px;
+}
+
+.episode-information p {
+  margin-top: 10px;
+  font-size: 16px !important;
+}
+
+.episode-video {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.download-btn {
+  background: #6fc341;
+  color: #fff;
+  font-size: 17px;
+  margin-top: 5px !important;
+}
+
+.download-btn:hover {
+  color: #fff;
+  background: #67b539;
+}
+
+.download-btn:focus {
+  color: #fff;
+  outline: none !important;
 }
 
 .term-content .term-description ul li h3 {
   width: auto;
   float: right;
   display: inline-table;
+  /* display: flex;
+  align-items: center !important;
+  justify-content: center !important; */
   font-size: 15px;
   line-height: 22px;
 }
@@ -1494,8 +1532,8 @@ main#home-page {
 .episode-icon {
   font-size: 2.13rem !important;
   border-radius: 100px !important;
-  width: 32px !important;
-  height: 32px !important;
+  width: 34px !important;
+  height: 34px !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;

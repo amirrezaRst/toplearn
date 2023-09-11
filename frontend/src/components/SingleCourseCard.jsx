@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import config from "../services/config.json";
 
 
-const SingleCourseCard = ({ location, id, title, teacher, price, time, cover }) => {
+const SingleCourseCard = ({ location, id, title, teacher, price, courses, cover }) => {
+
+    const [time, setTime] = useState();
+
+    useEffect(() => {
+        if (courses != undefined) {
+            const second = courses.reduce((total, sec) => {
+                return total + sec.time
+            }, 0)
+            var date = new Date(null);
+            date.setSeconds(second);
+            var time = date.toISOString().substr(11, 8);
+            setTime(time)
+        }
+    }, [])
 
     return (
         <Link to={`/course/${id}`} class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
@@ -20,8 +34,8 @@ const SingleCourseCard = ({ location, id, title, teacher, price, time, cover }) 
                         <p className="fa fa-user"></p> {teacher}
                     </Link>
                 </h2>
-                <span style={location == "/" ? { fontSize: "1.75rem" } : { fontSize: "1.5rem" }}> {price==0?"رایگان":price} </span>
-                <i style={location == "/" ? { fontSize: "1.7rem", color: "#00bffe" } : { fontSize: "1.4rem", color: "#00bffe" }}> 0:00:00</i>
+                <span style={location == "/" ? { fontSize: "1.75rem" } : { fontSize: "1.5rem" }}> {price == 0 ? "رایگان" : price} </span>
+                <i style={location == "/" ? { fontSize: "1.7rem", color: "#00bffe" } : { fontSize: "1.4rem", color: "#00bffe" }}>{time}</i>
                 {/* <i style={location == "/" ? { fontSize: "1.7rem",color:"#00bffe" } : { fontSize: "1.4rem",color:"#00bffe" }}> {time} </i> */}
             </article>
         </Link>
