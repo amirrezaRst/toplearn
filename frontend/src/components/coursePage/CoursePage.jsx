@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../common/Breadcrumb';
-import CoursePageComment from './CoursePageComment';
+import CoursePageComment from './commentSection/CoursePageComment';
 import CourseInformation from "./CourseInformation";
 import CourseSinglePart from './CourseSinglePart';
 import CourseTags from "./CourseTags";
@@ -105,7 +105,6 @@ const CoursePage = ({ user, setUser }) => {
                                     <img src={`${config.domain}/${courseData.cover}`} style={{ borderRadius: "10px" }} />
                                     : null
                                 }
-                                <h1>{!license ? "false" : "true"}</h1>
                                 <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
                                 <p>
                                     توضیحات دوره
