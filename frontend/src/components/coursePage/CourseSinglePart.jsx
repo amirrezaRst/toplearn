@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 
-const CourseSinglePart = ({ title, description, free, second, url }) => {
+const CourseSinglePart = ({ title, description, free, second, url, license }) => {
 
     const [time, setTime] = useState();
     const [show, setShow] = useState(false);
@@ -29,36 +29,49 @@ const CourseSinglePart = ({ title, description, free, second, url }) => {
 
     return (
         <Fragment>
-            <div className='episode-content' style={{ background: "whitesmoke" }}>
+            <div className='episode-content'>
 
                 <li className='single-episode' >
 
                     <h3 style={{ fontSize: "1.7rem" }}> {title} </h3>
-                    {!free ?
+                    {/* {!free ?
                         <i className='fa fa-lock-keyhole' style={{ borderRight: "2px solid #ebebeb", padding: "3px 8px 3px 0 ", marginRight: "7px" }}></i>
                         : null
+                    } */}
+                    {!license && !free ?
+                        <i className='fa fa-lock-keyhole' style={{ borderRight: "2px solid #ebebeb", padding: "3px 8px 3px 0 ", marginRight: "7px" }}></i> :
+                        null
                     }
+
                     <span className='episode-download-btn' onClick={showInfo}>
-                        <span className="fa fa-arrow-down-to-line episode-icon" style={free ?
-                            { color: "#6fc341", border: "1px solid #6fc341" } : { color: "#778899", border: "1px solid #778899" }
+                        <span className="fa fa-arrow-down-to-line episode-icon" style={!license && !free ?
+                            { color: "#778899", border: "1px solid #778899" } : { color: "#6fc341", border: "1px solid #6fc341" }
                         }></span>
                     </span>
                     <span>{time}</span>
 
                 </li>
 
-                {/* <div className="episode-information fade" style={!show ? { display: "none" } : null}> */}
                 <div className="episode-information" style={!show ? { display: "none" } : null}>
-                    <video src={`${config.domain}/${url}`} className="episode-video" controls preload='metadata'></video>
-                    <p>{description}</p>
 
-                    <div style={{ display: "flex", justifyContent: "end" }}>
-                        <Link to={`${config.domain}/api/course/download/${url}`} className="btn download-btn"> دانلود ویدیو این بخش </Link>
-                    </div>
+                    {!license && !free ?
+                        <p id='video-alert' >
+                            <i style={{ fontSize: "20px", marginLeft: "7px" }} className="far fa-circle-exclamation"></i>
+                            برای دانلود و دیدن این بخش باید در دوره ثبت نام کنید.
+                        </p> :
+                        <div>
+                            <video src={`${config.domain}/${url}`} className="episode-video" controls preload='metadata'></video>
+                            <p>{description}</p>
+
+                            <div style={{ display: "flex", justifyContent: "end" }}>
+                                <Link to={`${config.domain}/api/course/download/${url}`} className="btn download-btn"> دانلود ویدیو این بخش </Link>
+                            </div>
+                        </div>
+                    }
                 </div>
 
             </div>
-        </Fragment>
+        </Fragment >
     );
 }
 

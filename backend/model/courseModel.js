@@ -18,7 +18,6 @@ const courseSchema = mongoose.Schema({
     price: { type: Number, require: true },
     discount: { type: Number, default: 0 },
     courseLevel: { type: String, enum: ["basic", "middle", "advance"], require: true },
-    student: { type: Number, default: 0 },
     shortUrl: { type: String, default: shortid.generate() },
     tags: [{ type: String }],
     courses: [episodeSchema],

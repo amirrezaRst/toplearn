@@ -160,6 +160,7 @@ exports.addEpisode = async (req, res) => {
                 })
 
                 course.courses.push(newEpisode);
+                course.lastUpdate = Date.now();
                 await course.save();
 
                 res.status(201).json({ message: "episode added to courses" });

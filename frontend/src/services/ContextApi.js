@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const ContextApi = createContext({
-    userData: {},
+    userData: undefined,
     setUserData: () => { },
     userLogin: false,
     setUserLogin: () => { },

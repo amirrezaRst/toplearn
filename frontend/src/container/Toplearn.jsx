@@ -17,7 +17,7 @@ import config from "../services/config.json";
 
 const Toplearn = () => {
 
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState();
     const [userLogin, setUserLogin] = useState(false);
     const [courses, setCourses] = useState([]);
 
@@ -66,7 +66,7 @@ const Toplearn = () => {
                     <Route path="/signUp" element={<SingUp />} />
                     <Route path="/logIn" element={<LogIn />} />
                     <Route path="/archive" element={<Archive />} />
-                    <Route path="/course/*" element={<CoursePage />} />
+                    <Route path="/course/*" element={<CoursePage user={userData} />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/editProfile" element={<EditProfile />} />
                 </Routes>

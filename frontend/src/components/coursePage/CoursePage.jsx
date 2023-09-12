@@ -11,10 +11,11 @@ import axios from 'axios';
 import config from "../../services/config.json";
 import { useLocation } from 'react-router';
 
-const CoursePage = () => {
+const CoursePage = ({ user }) => {
 
     const [courseData, setCourseData] = useState();
-    const location = useLocation().pathname.split("/")[2]
+    const [license, setLicense] = useState();
+    const location = useLocation().pathname.split("/")[2];
 
 
     const courseApi = async () => {
@@ -23,15 +24,30 @@ const CoursePage = () => {
             setCourseData(res.data.course);
         }).catch(err => {
             console.log(err);
+        });
+    }
+
+    const statusPurchase = () => {
+        const findCourse = user.registeredCourses.findIndex(item => {
+            return item == courseData._id
         })
+        if (findCourse > -1) return setLicense(true)
+        setLicense(false);
     }
 
     useEffect(() => {
         courseApi();
     }, [])
+    useEffect(() => {
+        if (user) {
+            statusPurchase()
+        }
+    }, [courseApi, user])
 
     const result = () => {
-        console.log(courseData);
+        // console.log(user);
+        // statusPurchase()
+        console.log(license);
     }
 
     return (
@@ -56,7 +72,7 @@ const CoursePage = () => {
                                     <img src={`${config.domain}/${courseData.cover}`} style={{ borderRadius: "10px" }} />
                                     : null
                                 }
-
+                                <h1>{!license ? "false" : "true"}</h1>
                                 <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
                                 <p>
                                     توضیحات دوره
@@ -68,7 +84,7 @@ const CoursePage = () => {
 
                                     {courseData ?
                                         courseData.courses.map(item =>
-                                            <CourseSinglePart title={item.title} description={item.description} free={item.free} second={item.time} url={item.video} />
+                                            <CourseSinglePart title={item.title} description={item.description} free={item.free} second={item.time} url={item.video} license={license} />
                                         )
                                         : null
                                     }
@@ -90,7 +106,7 @@ const CoursePage = () => {
 
                             {courseData ?
                                 <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
-                                    price={courseData.price} discount={courseData.discount} student={courseData.student} />
+                                    price={courseData.price} discount={courseData.discount} update={courseData.lastUpdate} license={license} />
                                 : null
                             }
 
