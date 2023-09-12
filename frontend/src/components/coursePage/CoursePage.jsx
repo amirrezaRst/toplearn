@@ -10,8 +10,10 @@ import ShortUrl from './ShortUrl';
 import axios from 'axios';
 import config from "../../services/config.json";
 import { useLocation } from 'react-router';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
-const CoursePage = ({ user }) => {
+const CoursePage = ({ user, setUser }) => {
 
     const [courseData, setCourseData] = useState();
     const [license, setLicense] = useState();
@@ -20,11 +22,44 @@ const CoursePage = ({ user }) => {
 
     const courseApi = async () => {
         await axios.get(`${config.domain}/api/course/singleCourse/${location}`).then(res => {
-            console.log(res.data.course);
             setCourseData(res.data.course);
         }).catch(err => {
             console.log(err);
         });
+    };
+
+
+    const addToFavorite = async () => {
+        await axios.get(`${config.domain}/api/user/addToFavorite/${user._id}/${courseData._id}`, { headers: { "x-auth-token": localStorage.getItem("token") } }).then(res => {
+            setUser(res.data.user);
+        }).catch(err => {
+            if (err.response.data.status === 401) {
+                toast.error(`برای افزودن به علاقه مندی ها باید وارد حساب کاربری شوید`, {
+                    position: "bottom-right",
+                    theme: "light",
+                    closeOnClick: true,
+                    rtl: true
+                });
+            }
+            console.log(err);
+        })
+    }
+
+    const deleteToFavorite = async () => {
+        await axios.get(`${config.domain}/api/user/deleteToFavorite/${user._id}/${courseData._id}`, { headers: { "x-auth-token": localStorage.getItem("token") } }).then(res => {
+            setUser(res.data.user);
+        }).catch(err => {
+            if (err.response.data.status === 401) {
+                toast.error(`برای حذف از علاقه مندی ها باید وارد حساب کاربری شوید`, {
+                    position: "bottom-right",
+                    theme: "light",
+                    closeOnClick: true,
+                    rtl: true
+                });
+            }
+            console.log(err);
+        })
+
     }
 
     const statusPurchase = () => {
@@ -45,7 +80,7 @@ const CoursePage = ({ user }) => {
     }, [courseApi, user])
 
     const result = () => {
-        console.log(license);
+        console.log(user);
     }
 
     return (
@@ -107,8 +142,18 @@ const CoursePage = ({ user }) => {
                                     price={courseData.price} discount={courseData.discount} update={courseData.lastUpdate} license={license} />
                                 : null
                             }
+                            {
+                                user && user.favorite.findIndex(item => {
+                                    return item._id == courseData._id
+                                }) > -1 ?
+                                    <button className="btn" id='favorite-course2' style={{ fontSize: "16px" }} onClick={deleteToFavorite}>
+                                        حذف از علاقه مندی ها <i className="far fa-heart"></i>
+                                    </button> :
+                                    <button className="btn" id='favorite-course'  onClick={addToFavorite}>
+                                        افزودن به علاقه مندی ها <i className="fa fa-heart"></i>
+                                    </button>
+                            }
 
-                            <button className="btn" id='favorite-course'>افزودن به علاقه مندی ها <i className="fa fa-heart"></i></button>
 
                             {courseData ?
                                 <CourseTags tags={courseData.tags} />

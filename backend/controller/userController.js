@@ -11,15 +11,64 @@ const Joi = require("joi");
 exports.userList = async (req, res) => {
     const users = await userModel.find();
     res.json({ text: "fetch success", users });
-}
+};
 
 exports.singleUser = async (req, res) => {
     if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
 
-    const user = await userModel.findById(req.params.id);
+    const user = await userModel.findById(req.params.id).populate("favorite");
     if (!user) return res.status(422).json({ text: "user not found" })
 
     res.json({ text: "fetch success", user });
+};
+
+exports.addToFavorite = async (req, res) => {
+    if (!isValidObjectId(req.params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+    if (!isValidObjectId(req.params.courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+    const user = await userModel.findById(req.params.userId).populate("favorite");
+    if (!user) return res.status(422).json({ status: 422, text: "user not found" });
+
+    const itemIndex = user.favorite.findIndex(item => {
+        return item._id == req.params.courseId
+    })
+
+    if (itemIndex > -1) {
+        return res.status(203).json({ text: "The product has already been added" });
+    }
+    else {
+        user.favorite.push(req.params.courseId);
+    }
+
+    await user.save();
+
+    const newUser = await userModel.findById(req.params.userId).populate("favorite");
+
+    res.json({ status: 201, text: "course added", user: newUser });
+};
+
+exports.deleteToFavorite = async (req, res) => {
+    if (!isValidObjectId(req.params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+    if (!isValidObjectId(req.params.courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+
+    const user = await userModel.findById(req.params.userId).populate("favorite");
+    if (!user) return res.status(422).json({ status: 422, text: "user not found" });
+
+    const itemIndex = user.favorite.findIndex(item => {
+        return item._id == req.params.courseId
+    })
+
+    if (itemIndex > -1) {
+        await user.favorite.splice(itemIndex, 1);
+    }
+    else {
+        return res.status(422).json({ text: "course not found" });
+    }
+
+    await user.save();
+
+    res.json({ status:201,text: "course removed", user })
 }
 
 

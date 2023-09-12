@@ -85,7 +85,8 @@ const LogIn = () => {
             toast.error(`اشکالی در ثبت نام پیش امده ، لطفا بعدا دوباره امتحان کنید`, {
                 position: "bottom-right",
                 theme: "light",
-                closeOnClick: true
+                closeOnClick: true,
+                rtl: true
             })
             console.log(err);
         })

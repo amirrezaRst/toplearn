@@ -1524,6 +1524,24 @@ main#home-page {
   border-radius: 5px
 }
 
+#favorite-course:focus {
+  outline: none !important;
+}
+
+#favorite-course2 {
+  width: 100%;
+  /* background: #fff;   */
+  margin-bottom: 15px;
+  padding: 12px 0;
+  color: #F81E6B;
+  border: 1px solid #F81E6B;
+  border-radius: 5px;
+}
+
+#favorite-course2:focus {
+  outline: none !important;
+}
+
 .course-tag {
   border-radius: 3px;
 }

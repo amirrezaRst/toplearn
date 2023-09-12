@@ -28,7 +28,8 @@ const Toplearn = () => {
             toast.error(`مشکلی سمت سرور رخ داده ، لطفا بعدا امتحان کنید`, {
                 position: "bottom-right",
                 theme: "light",
-                closeOnClick: true
+                closeOnClick: true,
+                rtl: true
             })
             console.log(err);
         })
@@ -45,7 +46,8 @@ const Toplearn = () => {
             toast.error(`مشکلی سمت سرور رخ داده ، لطفا بعدا امتحان کنید`, {
                 position: "bottom-right",
                 theme: "light",
-                closeOnClick: true
+                closeOnClick: true,
+                rtl: true
             });
             console.log(err);
         })
@@ -66,7 +68,7 @@ const Toplearn = () => {
                     <Route path="/signUp" element={<SingUp />} />
                     <Route path="/logIn" element={<LogIn />} />
                     <Route path="/archive" element={<Archive />} />
-                    <Route path="/course/*" element={<CoursePage user={userData} />} />
+                    <Route path="/course/*" element={<CoursePage user={userData} setUser={setUserData} />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/editProfile" element={<EditProfile />} />
                 </Routes>

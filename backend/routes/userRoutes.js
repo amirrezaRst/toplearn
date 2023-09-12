@@ -2,14 +2,14 @@ const { Router } = require('express');
 
 const Auth = require("../middleware/Auth");
 const AdminAuth = require("../middleware/AdminAuth");
-const { userList, singleUser, register, login, deleteUser } = require('../controller/userController');
+const { userList, singleUser, register, login, deleteUser, addToFavorite, deleteToFavorite } = require('../controller/userController');
 
 const router = Router();
 
-// router.get("/userList", [Auth, AdminAuth], userList);
-// router.get("/singleUser", [Auth], singleUser);
-router.get("/userList",  userList);
+router.get("/userList", userList);
 router.get("/singleUser/:id", singleUser);
+router.get("/addToFavorite/:userId/:courseId", [Auth], addToFavorite);
+router.get("/deleteToFavorite/:userId/:courseId", [Auth], deleteToFavorite);
 
 router.post("/register", register);
 router.post("/login", login);
