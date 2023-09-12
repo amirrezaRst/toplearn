@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 
+const { commentSchema } = require('./commentSchema');
+
 const episodeSchema = mongoose.Schema({
     title: { type: String, require: true },
     description: { type: String, require: true },
@@ -23,6 +25,7 @@ const courseSchema = mongoose.Schema({
     courses: [episodeSchema],
     courseStatus: { type: String, enum: ["started", "finished"], default: "started" },
     lastUpdate: { type: Date, default: Date.now },
+    comment: [commentSchema]
 });
 
 exports.courseModel = mongoose.model("courses", courseSchema);

@@ -45,8 +45,6 @@ const CoursePage = ({ user }) => {
     }, [courseApi, user])
 
     const result = () => {
-        // console.log(user);
-        // statusPurchase()
         console.log(license);
     }
 

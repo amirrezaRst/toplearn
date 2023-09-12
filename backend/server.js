@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public", "courses/")))
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/teacher", require("./routes/teacherRoutes"));
 app.use("/api/course", require("./routes/courseRoutes"));
+app.use("/api/comment", require("./routes/commentRoutes"));
 
 
 app.listen(process.env.PORT, err => {

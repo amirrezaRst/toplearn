@@ -35,7 +35,7 @@ exports.downloadEpisode = async (req, res) => {
     fs.readFile(file, ({}), (filename, buff) => {
         if (buff == undefined) return res.status(422).json({ status: 404, text: "file not found" });
     });
-    
+
     res.download(file);
 }
 
@@ -157,7 +157,7 @@ exports.addEpisode = async (req, res) => {
 
                 await getVideoDurationInSeconds(path.join(__dirname, "../", "public", "courses", req.file.filename)).then((duration) => {
                     newEpisode.time = Math.floor(duration);
-                })
+                });
 
                 course.courses.push(newEpisode);
                 course.lastUpdate = Date.now();
