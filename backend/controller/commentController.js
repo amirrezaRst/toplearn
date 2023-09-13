@@ -1,8 +1,13 @@
 const { isValidObjectId } = require("mongoose");
+const axios = require('axios');
 
 const { courseModel } = require("../model/courseModel");
 const { userModel } = require('../model/userModel');
 const { newComment } = require('./validation/commentValidation');
+
+
+
+
 
 //! Post Request
 exports.addComment = async (req, res) => {
@@ -10,18 +15,37 @@ exports.addComment = async (req, res) => {
 
     if (newComment(req.body).error) return res.status(422).json({ status: 422, text: newComment(req.body).error.message });
 
+    //! Captcha validation
+    const responseKey = req.body.token;
+    if (!responseKey) return res.status(401).json({ status: 401, text: "google recaptcha has not been validated" });
+
+
     const course = await courseModel.findById(req.params.id);
     if (!course) return res.status(422).json({ status: 422, text: "course not found" });
+    // console.log(req.body.token);
+    const option = {
+        url: `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CATCHA_SECRET}&response=${req.body.token}`,
+        headers: { "Content-Type": "application/x-www-form-urlencoded", 'json': true }
+    };
 
-    const comment = {
-        fullName: req.body.fullName,
-        text: req.body.text,
-    }
+    await axios.get(option.url).then(async response => {
+        if (response.data.success === true) {
+            const comment = {
+                fullName: req.body.fullName,
+                text: req.body.text
+            };
+            await course.comment.push(comment);
+            await course.save();
 
-    await course.comment.push(comment);
-    await course.save();
-
-    res.json({ status: 201, text: "comment added", comment: comment, course });
+            return res.json({ status: 201, text: "comment added", comment, course });
+        }
+        else {
+            res.status(401).json({ status: 401, text: "google recaptcha has not been validated" });
+        }
+    }).catch(err => {
+        res.status(401).json({ status: 401, text: "google recaptcha has not been validated" });
+        console.log(err);
+    });
 }
 
 

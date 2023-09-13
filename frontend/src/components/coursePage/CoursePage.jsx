@@ -125,7 +125,7 @@ const CoursePage = ({ user, setUser }) => {
 
                             </section>
 
-                            <CoursePageComment />
+                            <CoursePageComment user={user} courseId={courseData ? courseData._id : null} setCourse={setCourseData} />
 
                         </div>
 
@@ -148,7 +148,7 @@ const CoursePage = ({ user, setUser }) => {
                                     <button className="btn" id='favorite-course2' style={{ fontSize: "16px" }} onClick={deleteToFavorite}>
                                         حذف از علاقه مندی ها <i className="far fa-heart"></i>
                                     </button> :
-                                    <button className="btn" id='favorite-course'  onClick={addToFavorite}>
+                                    <button className="btn" id='favorite-course' onClick={addToFavorite}>
                                         افزودن به علاقه مندی ها <i className="fa fa-heart"></i>
                                     </button>
                             }
