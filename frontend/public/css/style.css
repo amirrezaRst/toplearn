@@ -1095,9 +1095,11 @@ main#home-page {
 
 .comment-list .comment-row {
   width: 100%;
-  padding: 15px 90px 15px 15px;
+  padding: 20px 90px 20px 20px;
   position: relative;
-  border-bottom: 1px solid #ebebeb
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .comment-list .comment-row img {
@@ -1107,7 +1109,8 @@ main#home-page {
   position: absolute;
   right: 0;
   border: 2px solid #ebebeb;
-  top: 15px
+  margin-right: 10px;
+  top: 15px;
 }
 
 .comment-list .comment-row .left-col {
@@ -1634,6 +1637,22 @@ main#home-page {
 
 
 
-#comment-field{
+#comment-field {
   font-size: 16px;
+}
+
+.comment-badge {
+  font-size: 14px !important;
+  color: #fff !important;
+  padding: 2px 8px;
+  border-radius: 5px;
+  margin: 0 3px;
+}
+
+.badge-success {
+  background: #61b832 !important;
+}
+
+.badge-danger {
+  background: #f44336 !important;
 }

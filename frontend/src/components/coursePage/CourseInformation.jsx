@@ -23,8 +23,7 @@ const CourseInformation = ({ courseLevel, courseStatus, courses, update, price, 
 
         //! Set last update
         var newTime = update.split("T")[0].split("-");
-        newTime = `${newTime[0]}/${newTime[1]}/${newTime[2]}`;
-        newTime = moment(newTime, 'YYYY-M-D').endOf('jMonth').format('jYYYY/jM/jD');
+        newTime = moment(newTime, 'YYYY-M-D').format('jYYYY/jM/jD');
         setLastUpdate(newTime);
     }, [])
 

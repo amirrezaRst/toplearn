@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
     role: { type: String, enum: ["user", "teacher", "admin"], default: "user" },
+    profile: { type: String, default: "anonymous-user.jpg" },
     registeredCourses: [{ type: String }],
     favorite: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
     wallet: { type: Number, default: 0 },

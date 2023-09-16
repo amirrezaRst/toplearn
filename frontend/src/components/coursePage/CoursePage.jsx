@@ -125,7 +125,7 @@ const CoursePage = ({ user, setUser }) => {
 
                             </section>
 
-                            <CoursePageComment user={user} courseId={courseData ? courseData._id : null} setCourse={setCourseData} />
+                            <CoursePageComment user={user} courseId={courseData ? courseData._id : null} course={courseData} setCourse={setCourseData} />
 
                         </div>
 

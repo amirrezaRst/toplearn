@@ -2,11 +2,12 @@ import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ReCAPTCHA from "react-google-recaptcha";
+import Swal from 'sweetalert2';
 
 import config from "../../../services/config.json";
 
 
-const CommentForm = ({ user, courseId, setCourse }) => {
+const CommentForm = ({ user, courseId, course, setCourse }) => {
 
     const [text, setText] = useState();
     const [validation, setValidation] = useState();
@@ -29,7 +30,18 @@ const CommentForm = ({ user, courseId, setCourse }) => {
         };
 
         await axios.post(`${config.domain}/api/comment/addComment/${courseId}`, body, { headers: { "x-auth-token": localStorage.getItem("token") } }).then(res => {
-            console.log(res);
+            setText("");
+            setValidation();
+            setCaptcha()
+            const changeCourse = res.data.course;
+            const newCourse = { ...course, ...changeCourse }
+            setCourse(newCourse)
+            Swal.fire({
+                icon: 'success',
+                html: '<span style="font-size:2rem">نظر شما با موفقیت ثبت شد.</span>',
+                confirmButtonColor: "#59AB6E",
+                confirmButtonText: "Ok"
+            })
         }).catch(err => {
             if (err.response.data.text == "google recaptcha has not been validated") {
                 return setCaptcha("اعتبار سنجی گوگل الزامی است")
@@ -47,7 +59,8 @@ const CommentForm = ({ user, courseId, setCourse }) => {
     };
 
     const result = () => {
-        console.log(recaptchaRef.current.getValue());
+        // console.log(recaptchaRef.current.getValue());
+
     }
 
     return (

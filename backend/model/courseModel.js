@@ -24,7 +24,7 @@ const courseSchema = mongoose.Schema({
     tags: [{ type: String }],
     courses: [episodeSchema],
     courseStatus: { type: String, enum: ["started", "finished"], default: "started" },
-    lastUpdate: { type: Date, default: Date.now },
+    lastUpdate: { type: Date, default: Date.now() },
     comment: [commentSchema]
 });
 
