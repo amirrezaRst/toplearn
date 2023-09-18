@@ -1647,6 +1647,7 @@ main#home-page {
   padding: 2px 8px;
   border-radius: 5px;
   margin: 0 3px;
+  cursor: pointer;
 }
 
 .badge-success {

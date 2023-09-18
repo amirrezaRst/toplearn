@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Pagination from '../../common/Pagination';
 import CommentForm from './CommentForm';
 import SingleUserComment from './SingleUserComment';
 
 
 const CoursePageComment = ({ user, courseId, course, setCourse }) => {
+
+    const [commentId, setCommentId] = useState();
 
     const result = () => {
         console.log(course);
@@ -23,13 +25,14 @@ const CoursePageComment = ({ user, courseId, course, setCourse }) => {
 
             <div class="inner">
 
-                <CommentForm user={user} courseId={courseId} course={course} setCourse={setCourse} />
+                <CommentForm user={user} courseId={courseId} course={course} setCourse={setCourse} commentId={commentId} setCommentId={setCommentId} />
 
                 <div class="comment-list">
 
                     {course && course.comment.length > 0 ?
                         course.comment.map(item =>
-                            <SingleUserComment course={course} setCourse={setCourse} user={user} id={item._id} name={item.fullName} date={item.time} text={item.text} />
+                            <SingleUserComment course={course} setCourse={setCourse} user={user} id={item._id} name={item.fullName} date={item.time} text={item.text}
+                                setComment={setCommentId} reply={item.reply} />
                         ) :
                         null
                     }
