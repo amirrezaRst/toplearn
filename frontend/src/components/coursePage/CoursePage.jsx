@@ -142,7 +142,7 @@ const CoursePage = ({ user, setUser }) => {
                                 : null
                             }
                             {
-                                user && user.favorite.findIndex(item => {
+                                courseData && user && user.favorite.findIndex(item => {
                                     return item._id == courseData._id
                                 }) > -1 ?
                                     <button className="btn" id='favorite-course2' style={{ fontSize: "16px" }} onClick={deleteToFavorite}>

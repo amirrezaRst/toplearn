@@ -40,33 +40,6 @@ const CommentForm = ({ user, courseId, course, setCourse, commentId, setCommentI
             token: recaptchaRef.current.getValue()
         };
 
-        // await axios.post(`${config.domain}/api/comment/addComment/${courseId}`, body, { headers: { "x-auth-token": localStorage.getItem("token") } }).then(res => {
-        //     setText("");
-        //     setValidation();
-        //     setCaptcha()
-        //     const changeCourse = res.data.course;
-        //     const newCourse = { ...course, ...changeCourse }
-        //     setCourse(newCourse)
-        //     Swal.fire({
-        //         icon: 'success',
-        //         html: '<span style="font-size:2rem">نظر شما با موفقیت ثبت شد.</span>',
-        //         confirmButtonColor: "#59AB6E",
-        //         confirmButtonText: "Ok"
-        //     })
-        // }).catch(err => {
-        //     if (err.response.data.text == "google recaptcha has not been validated") {
-        //         return setCaptcha("اعتبار سنجی گوگل الزامی است")
-        //     }
-        //     else if (err.response.data.text == "You do not have permission to access the information") {
-        //         return toast.error(`برای گذاشتن نظر باید وارد حساب کاربری خود شوید.`, {
-        //             position: "bottom-right",
-        //             theme: "light",
-        //             closeOnClick: true,
-        //             rtl: true
-        //         });
-        //     };
-        //     console.log(err);
-        // });
 
         await axios.post(commentId === undefined ? `${config.domain}/api/comment/addComment/${courseId}` : `${config.domain}/api/comment/addReply/${courseId}/${commentId}`, body, { headers: { "x-auth-token": localStorage.getItem("token") } }).then(res => {
             setText("");
@@ -106,7 +79,7 @@ const CommentForm = ({ user, courseId, course, setCourse, commentId, setCommentI
         <form>
             <div class="row">
                 <form class="col-md-12 col-sm-12 col-xs-12" style={{ marginTop: "15px" }} onSubmit={e => e.preventDefault()}>
-                    <div class="form-group">
+                    <div class="form-group" style={{ marginBottom: "0" }}>
                         <textarea class="form-control" ref={textRef} id='comment-field' placeholder="متن نظر خود را وارد کنید..." value={text} onChange={e => setText(e.target.value)}></textarea>
                         <span style={{ color: "#ff4f4f" }}>{validation}</span>
                     </div>
@@ -121,7 +94,6 @@ const CommentForm = ({ user, courseId, course, setCourse, commentId, setCommentI
                     <div class="col-xs-12">
                         <button type="button" onClick={handleComment} class="btn btn-success"> ثبت دیدگاه </button>
                     </div>
-                    <button type='button' className="btn btn-primary" onClick={result}>Result</button>
                 </form>
             </div>
         </form>

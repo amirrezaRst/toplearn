@@ -37,8 +37,7 @@ const CoursePageComment = ({ user, courseId, course, setCourse }) => {
                         null
                     }
 
-
-                    <Pagination />
+                    {/* <Pagination /> */}
 
                 </div>
             </div>

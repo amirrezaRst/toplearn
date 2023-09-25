@@ -1,12 +1,14 @@
 import React from 'react';
 
 import SingleCourseCard from '../SingleCourseCard';
-import ArchivePagination from './ArchivePagination';
 import ArchiveSideBar from './ArchiveSideBar';
 import ArchiveTopBar from './ArchiveTopBar';
 
 
-const Archive = () => {
+const Archive = ({ courses }) => {
+    const result = () => {
+        console.log(courses);
+    }
     return (
         <React.Fragment>
 
@@ -23,12 +25,11 @@ const Archive = () => {
 
                             <section class="terms-items">
                                 <div class="row">
-
+                                    <button className="btn btn-primary" onClick={result}>Result</button>
                                     <SingleCourseCard location={window.location.pathname} />
 
                                 </div>
 
-                                <ArchivePagination />
 
                             </section>
 

@@ -5,16 +5,15 @@ const ArchiveSideBar = () => {
     return (
         <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 
-            <section class="aside-section filter-by-price" style={{ borderRadius: "5px" }}>
+            <section class="aside-section filter-by-price" style={{ borderRadius: "5px", textAlign: "center", paddingBottom: "20px" }}>
                 <header><h3> فیلتر بر اساس قیمت </h3></header>
-                <div class="price-range">
-                    <input type="hidden" value="" id="min-value" name="min_price" />
-                    <input type="hidden" value="" id="max-value" name="max_price" />
-                    <div class="price-bar"><div id="priceFilter"></div></div>
-                    <div class="max-price">تا <span id="max-text">500000</span> تومان</div>
-                    <div class="min-price">از <span id="min-text">20000</span> تومان</div>
-                    <div class="clearfix"></div>
+
+                <div className="filter-price">
+                    <button id="price-btn1" style={{ background: "#6FC341",color:"#fff" }}>همه</button>
+                    <button id="price-btn2">خریدنی</button>
+                    <button id="price-btn3" className="price-filter-btn">رایگان</button>
                 </div>
+                <button id='special-member-btn'>مخصوص اعضای ویژه</button>
             </section>
 
             <section class="aside-section filter-by-category" style={{ borderRadius: "5px" }}>

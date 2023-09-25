@@ -17,7 +17,7 @@ const HomeLastCourse = ({ courses }) => {
                     <h2 style={{ fontWeight: "500" }} onClick={result}> آخرین دوره های تاپ لرن </h2>
                     <div style={{ width: "75%", height: "3.5px", background: "#00bffe", borderRadius: '20px', marginTop: "5px" }}></div>
                 </div>
-                <Link to="/archive"> مشاهده همه دوره ها <i className="far fa-arrow-left" style={{ color: "#00bffe", fontSize: "1.8rem", marginRight: "5px" }}></i></Link>
+                <Link to="/courses"> مشاهده همه دوره ها <i className="far fa-arrow-left" style={{ color: "#00bffe", fontSize: "1.8rem", marginRight: "5px" }}></i></Link>
             </header>
             <div class="row">
 

@@ -18,7 +18,7 @@ const HomePopularCourse = ({ courses }) => {
                     <h2 style={{ fontWeight: "500" }} onClick={result}> دوره های محبوب تاپ لرن </h2>
                     <div style={{ width: "90%", height: "3.5px", background: "#00bffe", borderRadius: '20px', marginTop: "5px" }}></div>
                 </div>
-                <Link to="/archive"> مشاهده همه دوره ها <i className="far fa-arrow-left" style={{ color: "#00bffe", fontSize: "1.8rem", marginRight: "5px" }}></i></Link>
+                <Link to="/courses"> مشاهده همه دوره ها <i className="far fa-arrow-left" style={{ color: "#00bffe", fontSize: "1.8rem", marginRight: "5px" }}></i></Link>
             </header>
             <div class="row">
 
