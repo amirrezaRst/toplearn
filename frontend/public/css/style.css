@@ -1665,6 +1665,10 @@ main#home-page {
   border-radius: 5px !important;
 }
 
+.filter-price :hover {
+  color: #6FC341 !important;
+}
+
 .filter-price button {
   width: 100%;
   background: #fff;
@@ -1673,8 +1677,16 @@ main#home-page {
   border: none;
 }
 
+.price-filter-btn:hover {
+  color: #6FC341 !important;
+}
+
 #price-btn1 {
   border-radius: 0 5px 5px 0;
+}
+
+#price-btn1:hover {
+  color: #6cda31 !important;
 }
 
 #price-btn2 {
@@ -1683,16 +1695,87 @@ main#home-page {
   border-radius: 0;
 }
 
+#price-btn2:hover {
+  color: #6cda31 !important;
+}
+
 #price-btn3 {
   border-radius: 5px 0 0 5px;
 }
 
+#price-btn3:hover {
+  color: #6cda31 !important;
+}
+
 #special-member-btn {
-  width: 90%;
+  width: 100%;
   background: #fff;
   font-size: 15px;
   padding: 8px 0;
   margin-top: 10px;
   border: 1px solid #edf1f4;
   border-radius: 5px;
+}
+
+#special-member-btn:hover {
+  color: #6cda31 !important;
+}
+
+.filter-btn {
+  background: #fff;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #ebebeb;
+  padding: 8px;
+  /* margin-top: 3px; */
+}
+
+.filter-btn i {
+  font-size: 20px;
+}
+
+.filter-btn:hover i {
+  color: #6FC341 !important;
+}
+
+.filter-items h4 {
+  font-size: 17px !important;
+  margin-bottom: 10px;
+}
+
+.filter-items .radio-inline {
+  display: block !important;
+  font-size: 17px !important;
+  color: #555555;
+  margin-right: 0;
+}
+
+.filter-handle-btn {
+  background: #fff;
+  border: 1px solid #edf1f4;
+  border-radius: 5px;
+  font-size: 17px;
+}
+
+.filter-handle-btn:hover {
+  color: #fff !important;
+}
+
+#add-filter-btn {
+  background: #6FC341 !important;
+  color: #fff;
+  margin-left: 10px;
+}
+
+#add-filter-btn:hover {
+  color: #fff !important;
+}
+
+#cancel-filter-btn {
+  border: none;
+  color: #6FC341 !important;
+}
+
+#cancel-filter-btn:hover {
+  color: #6FC341 !important;
 }

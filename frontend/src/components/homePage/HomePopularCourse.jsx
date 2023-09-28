@@ -23,7 +23,7 @@ const HomePopularCourse = ({ courses }) => {
             <div class="row">
 
                 {courses && courses.length > 0 ?
-                    courses.map((item, index) => <SingleCourseCard location={window.location.pathname} id={item._id} title={item.title} teacher={item.teacher.fullName} price={item.price} courses={item.courses} cover={item.cover} />)
+                    courses.map((item, index) => <SingleCourseCard location={window.location.pathname} id={item._id} title={item.title} teacher={item.teacher.fullName} price={item.price} courses={item.courses} cover={item.cover} special={item.specialMember} />)
                     : null
                 }
 

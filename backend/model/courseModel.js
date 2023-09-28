@@ -18,6 +18,7 @@ const courseSchema = mongoose.Schema({
     description: { type: String, require: true },
     prerequisite: [{ type: String }],
     price: { type: Number, require: true },
+    specialMember: { type: Boolean, default: false },
     discount: { type: Number, default: 0 },
     courseLevel: { type: String, enum: ["basic", "middle", "advance"], require: true },
     shortUrl: { type: String, default: shortid.generate() },

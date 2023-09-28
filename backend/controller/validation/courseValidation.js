@@ -8,6 +8,7 @@ exports.createValidation = (data) => {
         description: joi.string().required(),
         prerequisite: joi.array(),
         price: joi.number().required(),
+        specialMember: joi.boolean().default(false),
         discount: joi.number().default(0),
         courseLevel: joi.string().valid("basic", "middle", "advance"),
         tags: joi.array(),
