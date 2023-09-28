@@ -26,6 +26,7 @@ const courseSchema = mongoose.Schema({
     courses: [episodeSchema],
     courseStatus: { type: String, enum: ["started", "finished"], default: "started" },
     lastUpdate: { type: Date, default: Date.now() },
+    date: { type: Date, default: Date.now },
     comment: [commentSchema]
 });
 

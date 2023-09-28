@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 
 import SingleCourseCard from '../SingleCourseCard';
 import ArchiveSideBar from './ArchiveSideBar';
@@ -8,6 +9,7 @@ import ArchiveTopBar from './ArchiveTopBar';
 const Archive = (props) => {
 
     const [courses, setCourses] = useState();
+    const [titleTag, setTitleTag] = useState(null);
 
     //! Filter States
     const [level, setLevel] = useState("all");
@@ -15,8 +17,20 @@ const Archive = (props) => {
     const [price, setPrice] = useState("all");
 
     const handleFilter = () => {
-        // console.log(props.courses.length > 0);
+        const params = new URLSearchParams(window.location.search);
+
         var filtered = props.courses;
+
+        // if (params.get("tag") != null) {
+        //     filtered = filtered.filter(course => {
+        //         return course.title.search(params.get("tag")) > -1
+        //     });
+        // };
+        if (titleTag) {
+            filtered = filtered.filter(course => {
+                return course.title.search(titleTag) > -1
+            });
+        };
         if (level != "all") {
             filtered = filtered.filter(course => {
                 return course.courseLevel == level;
@@ -46,15 +60,30 @@ const Archive = (props) => {
 
         }
         setCourses(filtered);
-    }
+    };
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search).get("tag");
+        if (params != null && titleTag == null) {
+            setTitleTag(params);
+        }
+        handleFilter();
+    }, [props.courses.length > 0]);
 
     useEffect(() => {
         handleFilter();
-        // console.log("useEffect running !");
-    }, [props.courses.length > 0])
+    }, [titleTag])
+
+    function compareNumbers(a, b) {
+        return a.lastUpdate - b.lastUpdate;
+    };
 
     const result = () => {
-        console.log(props);
+        // var sortByDate = props.courses;
+        // sortByDate = sortByDate.sort(compareNumbers)
+        // console.log(sortByDate);
+
+        console.log(titleTag == undefined);
     }
     return (
         <React.Fragment>
@@ -62,7 +91,8 @@ const Archive = (props) => {
             <div class="container">
                 <section class="term-categories">
 
-                    <ArchiveTopBar level={level} setLevel={setLevel} status={status} setStatus={setStatus} price={price} setPrice={setPrice} handleFilter={handleFilter} />
+                    <ArchiveTopBar level={level} setLevel={setLevel} status={status} setStatus={setStatus} price={price}
+                        setPrice={setPrice} handleFilter={handleFilter} titleTag={titleTag} setTitleTag={setTitleTag} />
 
                     <div class="row">
 
@@ -76,8 +106,8 @@ const Archive = (props) => {
                                     <button className="btn btn-primary" onClick={result}>Result</button>
                                     {/* <SingleCourseCard location={window.location.pathname} /> */}
                                     {courses && courses.length > 0 ?
-                                        courses.map((item, index) => <SingleCourseCard location={window.location.pathname} id={item._id} title={item.title} teacher={item.teacher.fullName} price={item.price} courses={item.courses} cover={item.cover} />)
-                                        : "null"
+                                        courses.map((item, index) => <SingleCourseCard location={window.location.pathname} id={item._id} title={item.title} teacher={item.teacher.fullName} price={item.price} courses={item.courses} cover={item.cover} special={item.specialMember} />)
+                                        : null
                                     }
 
                                 </div>
