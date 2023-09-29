@@ -11,8 +11,12 @@ router.get("/singleUser/:id", singleUser);
 router.get("/addToFavorite/:userId/:courseId", [Auth], addToFavorite);
 router.get("/deleteToFavorite/:userId/:courseId", [Auth], deleteToFavorite);
 
+// router.get("/teacherList", teacherList);
+// router.get("/singleTeacher/:id", singleTeacher);
+
 router.post("/register", register);
 router.post("/login", login);
+// router.post("/newTeacher", [Auth, AdminAuth], newTeacher);
 
 // router.put("/editInfo", editInfo);
 

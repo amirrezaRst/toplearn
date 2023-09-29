@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+const socialSchema = mongoose.Schema({
+    name: { type: String, require: true },
+    address: { type: String, require: true }
+})
 
 const userSchema = mongoose.Schema({
     fullName: { type: String, require: true, minLength: 3, maxLength: 100 },
@@ -13,6 +17,8 @@ const userSchema = mongoose.Schema({
     wallet: { type: Number, default: 0 },
     specialUser: { type: Boolean, default: false },
     expireData: { type: Date },
+    bio: { type: String },
+    socialMedia: [socialSchema]
 })
 
 exports.userModel = mongoose.model("users", userSchema);

@@ -68,7 +68,7 @@ exports.deleteToFavorite = async (req, res) => {
 
     await user.save();
 
-    res.json({ status:201,text: "course removed", user })
+    res.json({ status: 201, text: "course removed", user })
 }
 
 
