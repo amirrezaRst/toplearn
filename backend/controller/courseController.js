@@ -11,7 +11,7 @@ const { getVideoDurationInSeconds } = require('get-video-duration')
 //! Get Request
 exports.courseList = async (req, res) => {
     // const courses = await courseModel.find().populate("teacher").select("_id title price discount cover courseTime"); //todo must be edit
-    const courses = await courseModel.find().populate("teacher"); //todo must be edit
+    const courses = await courseModel.find().populate("teacher").sort({ "lastUpdate": -1 }); //todo must be edit
 
     res.json({ text: "fetch success", courses });
 }

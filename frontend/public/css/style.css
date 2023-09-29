@@ -1501,6 +1501,12 @@ main#home-page {
 
 
 /*! edited */
+.course-page-content {
+  /* background:#e5e5e5; */
+  background-image: url("../images/pattern.png");
+  padding-top: 10px;
+}
+
 #register-course {
   width: 100%;
   background: #2AAF27;
@@ -1509,6 +1515,7 @@ main#home-page {
   padding: 10px 0;
   margin-top: 20px;
 }
+
 
 #register-course:focus {
   outline: none;
@@ -1778,4 +1785,51 @@ main#home-page {
 
 #cancel-filter-btn:hover {
   color: #6FC341 !important;
+}
+
+
+
+
+
+/*! teachers page style */
+.teachers-page-content {
+  background-image: url("../images/pattern.png");
+}
+
+.teachers-page-content .top-bar p {
+  font-size: 17px;
+  color: #656565;
+}
+
+.teachers-page-content .card {
+  margin: 0 auto 40px auto;
+  background-color: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 0 0 15px #ccc
+}
+
+.teachers-page-content .card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 7px 15px #ccc
+}
+
+.teachers-page-content .card .card-body {
+  padding: 15px 20px 30px 20px;
+}
+
+.teachers-page-content .card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.teachers-page-content .card span {
+  font-size: 17px;
+  color: #000;
+}
+
+.teachers-page-content .card .fa-user {
+  margin-left: 7px;
+  color: #b0b9be;
 }

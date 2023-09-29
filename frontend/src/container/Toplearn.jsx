@@ -14,6 +14,7 @@ import ContextApi from '../services/ContextApi';
 import axios from "axios";
 
 import config from "../services/config.json";
+import Teachers from '../components/teachers/Teachers';
 
 const Toplearn = () => {
 
@@ -67,8 +68,9 @@ const Toplearn = () => {
                     <Route path="/" exact element={<Home courses={courses} />} />
                     <Route path="/signUp" element={<SingUp />} />
                     <Route path="/logIn" element={<LogIn />} />
-                    <Route path="/courses" element={<Archive courses={courses?courses:null} />} />
+                    <Route path="/courses" element={<Archive courses={courses ? courses : null} />} />
                     <Route path="/course/*" element={<CoursePage user={userData} setUser={setUserData} />} />
+                    <Route path="/teachers" element={<Teachers />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/editProfile" element={<EditProfile />} />
                 </Routes>

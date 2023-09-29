@@ -5,16 +5,12 @@ import SingleCourseCard from '../SingleCourseCard';
 
 const HomeLastCourse = ({ courses }) => {
 
-    const result = () => {
-        console.log(courses);
-    }
-
     return (
         <section class="terms-items">
             <header style={{ display: "flex", justifyContent: "space-between", marginBottom: "50px" }}>
                 <div>
                     <div style={{ width: "75%", height: "3.5px", background: "#5ce561", borderRadius: '20px', marginBottom: "3px", float: "left" }}></div>
-                    <h2 style={{ fontWeight: "500" }} onClick={result}> آخرین دوره های تاپ لرن </h2>
+                    <h2 style={{ fontWeight: "500" }}> آخرین دوره های تاپ لرن </h2>
                     <div style={{ width: "75%", height: "3.5px", background: "#00bffe", borderRadius: '20px', marginTop: "5px" }}></div>
                 </div>
                 <Link to="/courses"> مشاهده همه دوره ها <i className="far fa-arrow-left" style={{ color: "#00bffe", fontSize: "1.8rem", marginRight: "5px" }}></i></Link>

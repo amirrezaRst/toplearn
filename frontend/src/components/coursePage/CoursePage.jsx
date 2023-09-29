@@ -86,86 +86,88 @@ const CoursePage = ({ user, setUser }) => {
     return (
 
         <React.Fragment>
+            <main className='course-page-content'>
 
-            <Breadcrumb location={courseData ? ["/courses", courseData.title] : null} />
+                <Breadcrumb location={courseData ? ["/courses", courseData.title] : null} />
 
-            <div class="container">
-                <section class="term-content">
-                    <div class="row">
-                        <button className="btn btn-primary" onClick={result}>Result</button>
+                <div class="container">
+                    <section class="term-content">
+                        <div class="row">
+                            {/* <button className="btn btn-primary" onClick={result}>Result</button> */}
 
-                        <div class="col-md-8 col-sm-12 col-xs-12 pull-left">
-                            <section class="term-description" style={{ borderRadius: "10px" }}>
-                                {courseData ?
-                                    <ShortUrl title={courseData.title} id={courseData.shortUrl} />
-                                    : null
-                                }
-
-                                {courseData ?
-                                    <img src={`${config.domain}/${courseData.cover}`} style={{ borderRadius: "10px" }} />
-                                    : null
-                                }
-                                <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
-                                <p>
-                                    توضیحات دوره
-                                </p>
-
-                                <h2 style={{ fontSize: "2rem" }}> سرفصل های این دوره : </h2>
-
-                                <ul>
-
+                            <div class="col-md-8 col-sm-12 col-xs-12 pull-left">
+                                <section class="term-description" style={{ borderRadius: "10px" }}>
                                     {courseData ?
-                                        courseData.courses.map(item =>
-                                            <CourseSinglePart title={item.title} description={item.description} free={item.free} second={item.time} url={item.video} license={license} />
-                                        )
+                                        <ShortUrl title={courseData.title} id={courseData.shortUrl} />
                                         : null
                                     }
 
-                                </ul>
+                                    {courseData ?
+                                        <img src={`${config.domain}/${courseData.cover}`} style={{ borderRadius: "10px" }} />
+                                        : null
+                                    }
+                                    <h2 style={{ fontSize: "2rem" }}> ربات تلگرام برای چه کاری مفید است ؟ </h2>
+                                    <p>
+                                        توضیحات دوره
+                                    </p>
 
-                            </section>
+                                    <h2 style={{ fontSize: "2rem" }}> سرفصل های این دوره : </h2>
 
-                            <CoursePageComment user={user} courseId={courseData ? courseData._id : null} course={courseData} setCourse={setCourseData} />
+                                    <ul>
 
+                                        {courseData ?
+                                            courseData.courses.map(item =>
+                                                <CourseSinglePart title={item.title} description={item.description} free={item.free} second={item.time} url={item.video} license={license} />
+                                            )
+                                            : null
+                                        }
+
+                                    </ul>
+
+                                </section>
+
+                                <CoursePageComment user={user} courseId={courseData ? courseData._id : null} course={courseData} setCourse={setCourseData} />
+
+                            </div>
+
+                            <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
+
+                                {courseData ?
+                                    <TeacherResume id={courseData.teacher._id} fullName={courseData.teacher.fullName} image={courseData.teacher.pic} />
+                                    : null
+                                }
+
+                                {courseData ?
+                                    <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
+                                        price={courseData.price} discount={courseData.discount} update={courseData.lastUpdate} license={license} />
+                                    : null
+                                }
+                                {
+                                    courseData && user && user.favorite.findIndex(item => {
+                                        return item._id == courseData._id
+                                    }) > -1 ?
+                                        <button className="btn" id='favorite-course2' style={{ fontSize: "16px" }} onClick={deleteToFavorite}>
+                                            حذف از علاقه مندی ها <i className="far fa-heart"></i>
+                                        </button> :
+                                        <button className="btn" id='favorite-course' onClick={addToFavorite}>
+                                            افزودن به علاقه مندی ها <i className="fa fa-heart"></i>
+                                        </button>
+                                }
+
+
+                                {courseData ?
+                                    <CourseTags tags={courseData.tags} />
+                                    : null
+                                }
+
+                                <CourseShare />
+
+
+                            </aside>
                         </div>
-
-                        <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
-
-                            {courseData ?
-                                <TeacherResume id={courseData.teacher._id} fullName={courseData.teacher.fullName} image={courseData.teacher.pic} />
-                                : null
-                            }
-
-                            {courseData ?
-                                <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
-                                    price={courseData.price} discount={courseData.discount} update={courseData.lastUpdate} license={license} />
-                                : null
-                            }
-                            {
-                                courseData && user && user.favorite.findIndex(item => {
-                                    return item._id == courseData._id
-                                }) > -1 ?
-                                    <button className="btn" id='favorite-course2' style={{ fontSize: "16px" }} onClick={deleteToFavorite}>
-                                        حذف از علاقه مندی ها <i className="far fa-heart"></i>
-                                    </button> :
-                                    <button className="btn" id='favorite-course' onClick={addToFavorite}>
-                                        افزودن به علاقه مندی ها <i className="fa fa-heart"></i>
-                                    </button>
-                            }
-
-
-                            {courseData ?
-                                <CourseTags tags={courseData.tags} />
-                                : null
-                            }
-
-                            <CourseShare />
-
-
-                        </aside>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
+            </main>
 
         </React.Fragment>
 
