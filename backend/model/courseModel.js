@@ -13,7 +13,7 @@ const episodeSchema = mongoose.Schema({
 
 const courseSchema = mongoose.Schema({
     title: { type: String, require: true },
-    teacher: { type: mongoose.Schema.Types.ObjectId, ref: "teachers" },
+    teacher: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
     cover: { type: String },
     description: { type: String, require: true },
     prerequisite: [{ type: String }],
