@@ -21,9 +21,12 @@ const ArchiveTopBar = (props) => {
 
                 <div class="row" style={{ marginBottom: "5px" }}>
                     <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
-                        <form action="" method="">
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            props.handleFilter();
+                        }}>
                             <div class="input">
-                                <input type="text" value={props.titleTag} onChange={e=>props.setTitleTag(e.target.value)} name="" placeholder="عنوان مورد نظر ..." />
+                                <input type="text" value={props.titleTag} onChange={e => props.setTitleTag(e.target.value)} name="" placeholder="عنوان مورد نظر ..." />
                                 <button onClick={props.handleFilter} type="button"><i class="zmdi zmdi-search"></i></button>
                             </div>
                         </form>

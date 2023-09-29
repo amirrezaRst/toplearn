@@ -64,9 +64,12 @@ const Archive = (props) => {
     };
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search).get("tag");
-        if (params != null && titleTag == null) {
-            setTitleTag(params);
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("tag") != null && titleTag == null) {
+            setTitleTag(params.get("tag"));
+        }
+        else if (params.get("search") != null && titleTag == null) {
+            setTitleTag(params.get("search"));
         }
         handleFilter();
     }, [props.courses.length > 0]);
