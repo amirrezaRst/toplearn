@@ -80,14 +80,14 @@ const CoursePage = ({ user, setUser }) => {
     }, [courseApi, user])
 
     const result = () => {
-        console.log(user);
+        console.log(window.location.pathname);
     }
 
     return (
 
         <React.Fragment>
 
-            <Breadcrumb />
+            <Breadcrumb location={courseData ? ["/courses", courseData.title] : null} />
 
             <div class="container">
                 <section class="term-content">

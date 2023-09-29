@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import Breadcrumb from '../common/Breadcrumb';
 
 import SingleCourseCard from '../SingleCourseCard';
 import ArchiveSideBar from './ArchiveSideBar';
@@ -90,6 +91,8 @@ const Archive = (props) => {
 
             <div class="container">
                 <section class="term-categories">
+
+                    <Breadcrumb location={titleTag != null ? [window.location.pathname, titleTag] : [window.location.pathname]} />
 
                     <ArchiveTopBar level={level} setLevel={setLevel} status={status} setStatus={setStatus} price={price}
                         setPrice={setPrice} handleFilter={handleFilter} titleTag={titleTag} setTitleTag={setTitleTag} />

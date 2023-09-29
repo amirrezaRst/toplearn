@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Breadcrumb from '../common/Breadcrumb';
 import LevelFilter from './LevelFilter';
 import PriceFilter from './PriceFilter';
 import StatusFilter from './StatusFilter';
@@ -18,7 +17,6 @@ const ArchiveTopBar = (props) => {
     return (
         <React.Fragment>
 
-            <Breadcrumb />
             <div class="top-bar">
 
                 <div class="row" style={{ marginBottom: "5px" }}>
