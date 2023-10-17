@@ -23,8 +23,8 @@ const TopNavbar = ({ userData, userLogin }) => {
                                         <Link to="/" style={{ display: "inline", marginLeft: "20px" }}><img src="/images/logo3.png" style={{ width: "10%" }} alt="" /></Link>
                                         <NavLink to="/" exact activeStyle={{ color: "#20991d" }} > صفحه اصلی </NavLink>
                                         <NavLink to="/" exact activeStyle={{ color: "#20991d" }} > همکاری در فروش </NavLink>
-                                        <NavLink to="/aboutUs" activeStyle={{ color: "#20991d" }} > درباره ما </NavLink>
-                                        <NavLink to="/ContactUs" activeStyle={{ color: "#20991d" }} > تماس با ما </NavLink>
+                                        <NavLink to="/about-us" activeStyle={{ color: "#20991d" }} > درباره ما </NavLink>
+                                        <NavLink to="/Contact-us" activeStyle={{ color: "#20991d" }} > تماس با ما </NavLink>
                                         <span style={{ color: "#fff", fontSize: "1.7rem", marginRight: "20px", cursor: "pointer" }}> <i class="fa-regular fa-magnifying-glass"></i></span>
                                         <div><button className="btn btn-success" onClick={result}>Result</button> </div>
                                     </li>
@@ -35,7 +35,7 @@ const TopNavbar = ({ userData, userLogin }) => {
 
                                     {userData && userLogin == true ?
                                         <div className="loggein ">
-                                            <i className="zmdi zmdi-account"></i><Link style={{fontSize:"1.7rem"}} to="/"> {userData.fullName} </Link>
+                                            <i className="zmdi zmdi-account"></i><Link style={{ fontSize: "1.7rem" }} to="/account/dashboard"> {userData.fullName} </Link>
                                         </div> :
                                         <div className="signin" style={{ fontSize: "1.6rem" }}>
                                             <i className="far fa-user" style={{ fontSize: "1.7rem" }}></i>

@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, Switch } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import config from "../services/config.json";
 
 import MainLayout from '../components/layouts/MainLayout';
+import AccountLayout from '../components/layouts/AccountLayout';
+
 import Home from '../components/homePage/Home';
 import SingUp from '../components/register/SignUp';
 import LogIn from '../components/register/LogIn';
 import Archive from '../components/archivePage/Archive';
-import Profile from '../components/profilePage/Profile';
-import EditProfile from '../components/profilePage/EditProfile';
+import EditProfile from '../components/accountPage/EditProfile';
 import CoursePage from '../components/coursePage/CoursePage';
 import ContextApi from '../services/ContextApi';
-import axios from "axios";
 
-import config from "../services/config.json";
 import Teachers from '../components/teachers/Teachers';
+import TeacherPage from '../components/teachers/TeacherPage';
+import AboutUs from '../components/usPage/AboutUs';
+import ContactUs from '../components/usPage/ContactUs';
+import Dashboard from '../components/accountPage/Dashboard';
+import EditSetting from '../components/accountPage/EditSetting';
+import NotFound from '../components/NotFound';
+
 
 const Toplearn = () => {
 
@@ -57,7 +65,7 @@ const Toplearn = () => {
     useEffect(() => {
         courseApi();
         if (localStorage.getItem("userId")) return userApi();
-    }, [])
+    }, []);
 
     return (
 
@@ -68,16 +76,21 @@ const Toplearn = () => {
                     <Route path="/" exact element={<Home courses={courses} />} />
                     <Route path="/signUp" element={<SingUp />} />
                     <Route path="/logIn" element={<LogIn />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="/courses" element={<Archive courses={courses ? courses : null} />} />
                     <Route path="/course/*" element={<CoursePage user={userData} setUser={setUserData} />} />
                     <Route path="/teachers" element={<Teachers />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/editProfile" element={<EditProfile />} />
+                    <Route path="/teachers/:teacherId" element={<TeacherPage courses={courses && courses.length > 0 ? courses : undefined} />} />
+                    <Route path="/account/dashboard" element={<AccountLayout><Dashboard /></AccountLayout>} />
+                    <Route path="/account/edit-profile" element={<AccountLayout><EditProfile /></AccountLayout>} />
+                    <Route path="/account/edit-setting" element={<AccountLayout><EditSetting /></AccountLayout>} />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
+
                 <ToastContainer />
-
-
             </MainLayout>
+
         </ContextApi.Provider>
 
     );

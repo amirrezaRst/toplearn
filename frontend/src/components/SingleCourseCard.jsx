@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import config from "../services/config.json";
 
 
-const SingleCourseCard = ({ location, id, title, teacher, price, courses, cover, special }) => {
+const SingleCourseCard = ({ location, id, title, teacher, teacherId, price, courses, cover, special }) => {
 
     const [time, setTime] = useState();
 
@@ -30,7 +30,7 @@ const SingleCourseCard = ({ location, id, title, teacher, price, courses, cover,
                     <Link to={`/course/${id}`} style={location == "/" ? { fontSize: "1.6rem" } : { fontSize: "1.4rem" }}> {title} </Link>
                 </h2>
                 <h2>
-                    <Link to={`/course/${id}`} style={location == "/" ? { fontSize: "1.5rem", color: "#778286" } : { fontSize: "1.4rem", color: "#778286" }}>
+                    <Link to={`/teachers/${teacherId}`} className="teacher-link" style={location == "/" ? { fontSize: "1.5rem", color: "#778286" } : { fontSize: "1.4rem", color: "#778286" }}>
                         <p className="fa fa-user"></p> {teacher}
                     </Link>
                 </h2>

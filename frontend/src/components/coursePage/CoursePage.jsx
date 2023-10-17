@@ -133,7 +133,7 @@ const CoursePage = ({ user, setUser }) => {
                             <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
 
                                 {courseData ?
-                                    <TeacherResume id={courseData.teacher._id} fullName={courseData.teacher.fullName} image={courseData.teacher.pic} />
+                                    <TeacherResume id={courseData.teacher._id} fullName={courseData.teacher.fullName} image={courseData.teacher.profile} />
                                     : null
                                 }
 
