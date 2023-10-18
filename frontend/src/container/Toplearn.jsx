@@ -22,6 +22,10 @@ import ContactUs from '../components/usPage/ContactUs';
 import Dashboard from '../components/accountPage/Dashboard';
 import EditSetting from '../components/accountPage/EditSetting';
 import NotFound from '../components/NotFound';
+import EditPassword from '../components/accountPage/EditPassword';
+import Orders from '../components/accountPage/Orders';
+import FavoriteCourse from '../components/accountPage/FavoriteCourse';
+import Consult from '../components/accountPage/Consult';
 
 
 const Toplearn = () => {
@@ -82,9 +86,15 @@ const Toplearn = () => {
                     <Route path="/course/*" element={<CoursePage user={userData} setUser={setUserData} />} />
                     <Route path="/teachers" element={<Teachers />} />
                     <Route path="/teachers/:teacherId" element={<TeacherPage courses={courses && courses.length > 0 ? courses : undefined} />} />
+
                     <Route path="/account/dashboard" element={<AccountLayout><Dashboard /></AccountLayout>} />
                     <Route path="/account/edit-profile" element={<AccountLayout><EditProfile /></AccountLayout>} />
                     <Route path="/account/edit-setting" element={<AccountLayout><EditSetting /></AccountLayout>} />
+                    <Route path="/account/edit-password" element={<AccountLayout><EditPassword /></AccountLayout>} />
+                    <Route path="/account/order" element={<AccountLayout><Orders /></AccountLayout>} />
+                    <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse /></AccountLayout>} />
+                    <Route path="/account/consult" element={<AccountLayout><Consult /></AccountLayout>} />
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
 

@@ -26,7 +26,7 @@ const TopNavbar = ({ userData, userLogin }) => {
                                         <NavLink to="/about-us" activeStyle={{ color: "#20991d" }} > درباره ما </NavLink>
                                         <NavLink to="/Contact-us" activeStyle={{ color: "#20991d" }} > تماس با ما </NavLink>
                                         <span style={{ color: "#fff", fontSize: "1.7rem", marginRight: "20px", cursor: "pointer" }}> <i class="fa-regular fa-magnifying-glass"></i></span>
-                                        <div><button className="btn btn-success" onClick={result}>Result</button> </div>
+                                        {/* <div><button className="btn btn-success" onClick={result}>Result</button> </div> */}
                                     </li>
                                 </ul>
                             </div>

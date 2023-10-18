@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactSwitch from 'react-switch';
 
 
 const EditProfile = () => {
@@ -51,16 +52,33 @@ const EditProfile = () => {
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12 " style={{ margin: "0 auto" }}>
 
-                                    <label class="switch">
-                                        <input type="checkbox" />
-                                            <span class="slider round"></span>
-                                    </label>
+                                    <div className="gender-radio">
+                                        <span>
+                                            جنسیت نامشخص <input type="radio" name="gender" id="" checked />
+                                        </span>
+                                        <span>
+                                            آقا <input type="radio" name="gender" id="" />
+                                        </span>
+                                        <span>
+                                            خانم <input type="radio" name="gender" id="" />
+                                        </span>
+                                    </div>
 
-
+                                    <span style={{ marginLeft: "20px", }}>
+                                        پروفایل قابل مشاهده برای دیگران باشد؟
+                                    </span>
+                                    <ReactSwitch
+                                        onColor="#7EC857"
+                                        offColor='#728DAE'
+                                        // width={65}
+                                        checked
+                                        checkedIcon={<h3 style={{ height: "100%", display: 'flex', alignItems: "center", justifyContent: "center", color: "#fff" }}>بله</h3>}
+                                        uncheckedIcon={<h3 style={{ height: "100%", display: 'flex', alignItems: "center", justifyContent: "center", color: "#fff" }}>خیر</h3>}
+                                    />
                                 </div>
 
                             </div>
-                            <button className="btn btn-success">ویرایش حساب کاربری</button>
+                            <button className="btn btn-success" style={{ marginTop: "30px" }}>ویرایش حساب کاربری</button>
 
                         </form>
 

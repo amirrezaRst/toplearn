@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ReactSwitch from 'react-switch';
+import Loading from '../Loading';
 
 const EditSetting = () => {
     const [checked, setChecked] = useState(false);
@@ -33,7 +34,7 @@ const EditSetting = () => {
                                 onChange={handleChange}
                                 onColor="#7EC857"
                                 offColor='#728DAE'
-                        height={32}
+                                height={32}
                                 width={65}
                                 checkedIcon={<h3 style={{ height: "100%", display: 'flex', alignItems: "center", justifyContent: "center", color: "#fff" }}>بله</h3>}
                                 uncheckedIcon={<h3 style={{ height: "100%", display: 'flex', alignItems: "center", justifyContent: "center", color: "#fff" }}>خیر</h3>}
@@ -53,7 +54,7 @@ const EditSetting = () => {
                         </div>
 
                     </div>
-                    <button className="btn btn-success">ویرایش تنظیمات حساب</button>
+                    <button className="btn btn-success" style={{marginTop:"30px"}}>ویرایش تنظیمات حساب</button>
 
                 </div>
 

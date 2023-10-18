@@ -2200,6 +2200,26 @@ main#home-page {
 }
 
 
+.gender-radio {
+  margin-bottom: 25px;
+}
+
+.gender-radio span {
+  margin: 0 15px;
+  font-size: 15px;
+}
+
+.gender-radio input[type="radio"] {
+  font: inherit;
+  width: 1.15em;
+  accent-color: green !important;
+  height: 1.15em;
+  border-radius: 50%;
+  transform: translateY(0.35em);
+  margin-right: 5px;
+}
+
+
 
 
 /*! edit setting page styles  */
@@ -2287,4 +2307,65 @@ main#home-page {
   align-items: "center";
   justify-content: "center";
   text-align: "center";
+}
+
+/*! loading styles */
+.loading-content {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/*! account orders page styles */
+.account-orders tr {
+  border: none !important;
+  outline: none !important;
+}
+
+.account-orders table tbody tr td {
+  /* border-color: #edf1f4 !important; */
+  border-color: #dddddd !important;
+}
+
+.account-orders table .head {
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.account-orders .table-striped {
+  text-align: center;
+}
+
+.account-orders .table-striped tr {
+  align-items: center;
+}
+
+.account-orders .table-striped i {
+  color: #e02821;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+
+/*! account consult page style */
+.consult-header {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.consult-header button {
+  background: #00bb1f;
+  color: #fff !important;
+}
+
+.consult-header button:focus {
+  outline: none !important;
+}
+.table-bordered tr{
+  text-align: center;
 }
