@@ -48,7 +48,7 @@ const CourseInformation = ({ courseLevel, courseStatus, courses, update, price, 
                         {lastUpdate}
                     </span>
                 </li>
-                <li><span style={{ fontSize: "2rem", marginTop: '20px' }}>قیمت دوره :</span> <span style={{ fontSize: "1.9rem", color: "#2aaf27" }}>{price == 0 ? "رایگان" : `${price} تومان`}</span></li>
+                <li><span style={{ fontSize: "2rem", marginTop: '20px' }}>قیمت دوره :</span> <span style={{ fontSize: "1.9rem", color: "#2aaf27" }}>{price == 0 ? "رایگان" : `${new Intl.NumberFormat().format(price)} تومان`}</span></li>
             </ul>
             {
                 !license && price != 0 ?

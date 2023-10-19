@@ -34,7 +34,7 @@ const SingleCourseCard = ({ location, id, title, teacher, teacherId, price, cour
                         <p className="fa fa-user"></p> {teacher}
                     </Link>
                 </h2>
-                <span style={location == "/" ? { fontSize: "1.75rem" } : { fontSize: "1.5rem" }}> {price == 0 && !special ? "رایگان" : price == 0 && special ? "اعضای ویژه" : price} </span>
+                <span style={location == "/" ? { fontSize: "1.75rem" } : { fontSize: "1.5rem" }}> {price == 0 && !special ? "رایگان" : price == 0 && special ? "اعضای ویژه" : new Intl.NumberFormat().format(price)} </span>
                 <i style={location == "/" ? { fontSize: "1.7rem", color: "#00bffe" } : { fontSize: "1.4rem", color: "#00bffe" }}>{time}</i>
                 {/* <i style={location == "/" ? { fontSize: "1.7rem",color:"#00bffe" } : { fontSize: "1.4rem",color:"#00bffe" }}> {time} </i> */}
             </article>

@@ -26,6 +26,7 @@ import EditPassword from '../components/accountPage/EditPassword';
 import Orders from '../components/accountPage/Orders';
 import FavoriteCourse from '../components/accountPage/FavoriteCourse';
 import Consult from '../components/accountPage/Consult';
+import Basket from '../components/accountPage/Basket';
 
 
 const Toplearn = () => {
@@ -94,6 +95,7 @@ const Toplearn = () => {
                     <Route path="/account/order" element={<AccountLayout><Orders /></AccountLayout>} />
                     <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse /></AccountLayout>} />
                     <Route path="/account/consult" element={<AccountLayout><Consult /></AccountLayout>} />
+                    <Route path="/account/basket" element={<Basket />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
