@@ -2324,6 +2324,19 @@ main#home-page {
 .account-orders tr {
   border: none !important;
   outline: none !important;
+  transition: background .25s;
+}
+
+.account-orders tr:hover {
+  background: #f0f0f0;
+}
+
+.account-orders tr span {
+  color: #333333 !important;
+  transition :color .25s;
+}
+.account-orders tr span:hover {
+  color: #00aad4 !important;
 }
 
 .account-orders table tbody tr td {

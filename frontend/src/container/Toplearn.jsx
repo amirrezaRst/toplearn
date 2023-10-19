@@ -93,7 +93,7 @@ const Toplearn = () => {
                     <Route path="/account/edit-setting" element={<AccountLayout><EditSetting /></AccountLayout>} />
                     <Route path="/account/edit-password" element={<AccountLayout><EditPassword /></AccountLayout>} />
                     <Route path="/account/order" element={<AccountLayout><Orders /></AccountLayout>} />
-                    <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse /></AccountLayout>} />
+                    <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse cart={userData ? userData.cart : null} /></AccountLayout>} />
                     <Route path="/account/consult" element={<AccountLayout><Consult /></AccountLayout>} />
                     <Route path="/account/basket" element={<Basket />} />
 

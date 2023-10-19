@@ -91,13 +91,52 @@ exports.addToCart = async (req, res) => {
     if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
     if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    });
     if (!user) return res.status(422).json({ status: 404, text: "user not found" });
 
+    const itemIndex = user.cart.findIndex(item => {
+        return item._id == courseId
+    })
+
+    if (itemIndex > -1) {
+        return res.json({ status: 422, text: "already added to cart" });
+    }
     user.cart.push(courseId);
     await user.save();
 
-    res.status(201).json({ status: 201, text: "course added to cart" });
+    res.status(201).json({ status: 201, text: "course added to cart", cart: user.cart });
+}
+
+exports.removeFromCart = async (req, res) => {
+    const { userId, courseId } = req.params
+    if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
+    if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+    const user = await userModel.findById(userId).select("cart").populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    });
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+
+    const findIndex = user.cart.findIndex(item => {
+        return item._id == courseId
+    })
+    user.cart.splice(findIndex, 1)
+    await user.save();
+
+    res.status(200).json({ status: 200, text: "course removed", cart: user.cart });
 }
 
 
