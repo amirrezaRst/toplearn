@@ -2467,7 +2467,7 @@ main#home-page {
 }
 
 
-.basket-container .captcha-card{
+.basket-container .captcha-card {
   background: #fff;
   box-shadow: 0 0 5px #ccc;
   -moz-box-shadow: 0 0 5px #ccc;
@@ -2485,14 +2485,43 @@ main#home-page {
   -moz-box-shadow: 0 0 5px #ccc;
   -webkit-box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
-  padding: 16px 23px;
+  padding: 14px 23px;
   display: flex;
+  flex-flow: row;
   justify-content: space-between;
   align-items: center;
 }
 
+@media screen and (max-width:800px) {
+  .basket-course-content .course-item {
+    flex-flow: column;
+    align-items: start;
+  }
+
+  .basket-course-content .course-item .course-info h2 {
+    margin: 8px 0 !important;
+  }
+}
+
 .basket-course-content .course-item .course-info h2 {
-  margin: 17px 0;
+  margin: 14px 0;
+  color: #000;
+  transition: all .25s;
+}
+
+.basket-course-content .course-item .course-info h2.course-title:hover {
+  color: #00aad4 !important;
+}
+
+
+
+.basket-course-content .course-item .course-info .course-item-discount {
+  margin-left: 15px;
+  text-align: center;
+}
+
+.basket-course-content .course-item .course-info .course-item-discount h2 {
+  margin: 8px 0;
 }
 
 .basket-course-content .course-item .course-info .xmark-icon {

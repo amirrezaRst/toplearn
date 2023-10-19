@@ -16,7 +16,21 @@ exports.userList = async (req, res) => {
 exports.singleUser = async (req, res) => {
     if (!isValidObjectId(req.params.id)) return res.status(422).json({ text: "id is not valid" });
 
-    const user = await userModel.findById(req.params.id).populate("favorite");
+    const user = await userModel.findById(req.params.id).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    }).populate({
+        path: "favorite",
+        populate: {
+            path: "teacher",
+            select: "_id fullName"
+        },
+        select: "_id title teacher price discount cover"
+    }).select("-password")
     if (!user) return res.status(422).json({ text: "user not found" })
 
     res.json({ text: "fetch success", user });
@@ -72,6 +86,20 @@ exports.deleteToFavorite = async (req, res) => {
 }
 
 
+exports.addToCart = async (req, res) => {
+    const { userId, courseId } = req.params
+    if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
+    if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+    const user = await userModel.findById(userId);
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    user.cart.push(courseId);
+    await user.save();
+
+    res.status(201).json({ status: 201, text: "course added to cart" });
+}
+
 
 //! Post Request
 exports.register = async (req, res) => {
@@ -112,6 +140,7 @@ exports.login = async (req, res) => {
 
     res.header("Access-Control-Expose-headers", "x-auth-token").header("x-auth-token", token).json({ text: "login successfully", user });
 }
+
 
 
 

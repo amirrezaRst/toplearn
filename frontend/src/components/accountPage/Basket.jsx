@@ -2,12 +2,13 @@ import { useRef } from "react";
 import Breadcrumb from "../common/Breadcrumb";
 
 import ReCAPTCHA from "react-google-recaptcha";
+import { Link } from "react-router-dom";
 
 const Basket = () => {
 
     const recaptchaRef = useRef(null);
 
-    
+
     return (
         <main className="basket-container">
             <div className="container">
@@ -20,11 +21,15 @@ const Basket = () => {
                         <div className="basket-course-content">
                             <div className="course-item">
                                 <div className="course-info" style={{ flexGrow: "1" }}>
-                                    <h2 style={{ fontSize: "1.15em" }}>آموزش جامع مدل سازی پیشرفته یادگیری عمیق (deep learning) با پایتون</h2>
+                                    <Link> <h2 className="course-title" style={{ fontSize: "1.15em" }}>آموزش جامع مدل سازی پیشرفته یادگیری عمیق (deep learning) با پایتون</h2></Link>
                                     <h2 style={{ color: "#686e71" }}>مدرس : امیرحسین ساوه دربندسری</h2>
                                 </div>
                                 <div className="course-info">
-                                    <h2 style={{ color: "#6fc341", marginLeft: "20px" }}>450,000 تومان</h2>
+                                    <div className="course-item-discount">
+                                        <h2 style={{ color: "#f66565",fontSize:"0.95em" }}> <del>450,000 تومان</del> </h2>
+                                        <h2 style={{ color: "#9a9da9",fontSize:"0.95em"  }}>10% تخفیف</h2>
+                                        <h2 style={{ color: "#6fc341" }}>450,000 تومان</h2>
+                                    </div>
                                     <div className="xmark-icon"><i className="fa fa-xmark"></i></div>
                                 </div>
                             </div>

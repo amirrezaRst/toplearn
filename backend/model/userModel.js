@@ -19,7 +19,8 @@ const userSchema = mongoose.Schema({
     specialUser: { type: Boolean, default: false },
     expireData: { type: Date },
     bio: { type: String, default: null },
-    socialMedia: [socialSchema]
+    socialMedia: [socialSchema],
+    cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }]
 })
 
 exports.userModel = mongoose.model("users", userSchema);
