@@ -22,6 +22,7 @@ const TopNavbar = ({ userData, userLogin }) => {
                                     <li>
                                         <Link to="/" style={{ display: "inline", marginLeft: "20px" }}><img src="/images/logo3.png" style={{ width: "10%" }} alt="" /></Link>
                                         <NavLink to="/" exact activeStyle={{ color: "#20991d" }} > صفحه اصلی </NavLink>
+                                        <NavLink to="/courses" activeStyle={{ color: "#20991d" }} > دوره ها </NavLink>
                                         <NavLink to="/" exact activeStyle={{ color: "#20991d" }} > همکاری در فروش </NavLink>
                                         <NavLink to="/about-us" activeStyle={{ color: "#20991d" }} > درباره ما </NavLink>
                                         <NavLink to="/Contact-us" activeStyle={{ color: "#20991d" }} > تماس با ما </NavLink>

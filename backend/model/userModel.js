@@ -7,7 +7,7 @@ const socialSchema = mongoose.Schema({
 
 const userSchema = mongoose.Schema({
     fullName: { type: String, require: true, minLength: 3, maxLength: 100 },
-    userName: { type: String, require: true },
+    // userName: { type: String, require: true,minLength: 3, maxLength: 100 },
     phone: { type: String, require: true, minLength: 11, maxLength: 11 },
     email: { type: String, require: true, unique: true },
     password: { type: String, require: true },
@@ -18,7 +18,9 @@ const userSchema = mongoose.Schema({
     wallet: { type: Number, default: 0 },
     specialUser: { type: Boolean, default: false },
     expireData: { type: Date },
-    bio: { type: String, default: null },
+    bio: { type: String, trim: true, default: null },
+    gender: { type: String, enum: ["male", "female", "unknow"], default: "unknow" },
+    isVisible: { type: Boolean, default: true },
     socialMedia: [socialSchema],
     cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }]
 })

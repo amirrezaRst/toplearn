@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
-const AccountSidebar = () => {
+import config from "../../services/config.json";
+
+
+const AccountSidebar = ({ user }) => {
     return (
         <div class="col-md-3 col-sm-4 col-xs-12" style={{ marginBottom: "20px" }}>
             <aside>
@@ -12,10 +15,10 @@ const AccountSidebar = () => {
                         </div>
                         <div class="img-layer">
                             <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
-                            <img src="images/pic/avatar.jpg" />
+                            <img src={`${config.domain}/${user.profile}`} />
                         </div>
                         <div class="detail">
-                            <span style={{ textTransform: "capitalize" }}> amirreza rostami </span>
+                            <span style={{ textTransform: "capitalize", fontSize: "1.3em" }}> {user.fullName} </span>
                         </div>
 
                     </div>

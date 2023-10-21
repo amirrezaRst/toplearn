@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { userModel } = require("../model/userModel");
-const { registerValidation, loginValidation } = require('./validation/userValidation');
+const { registerValidation, loginValidation, editInfoValidation } = require('./validation/userValidation');
 const Joi = require("joi");
 
 
@@ -91,35 +91,20 @@ exports.addToCart = async (req, res) => {
     if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
     if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
 
-    const user = await userModel.findById(userId).populate({
-        path: "cart",
-        populate: {
-            path: "teacher",
-            select: "fullName"
-        },
-        select: "_id title price discount"
-    });
+    const user = await userModel.findById(userId).select("cart");
     if (!user) return res.status(422).json({ status: 404, text: "user not found" });
 
     const itemIndex = user.cart.findIndex(item => {
-        return item._id == courseId
+        return item._id == courseId;
     })
-
     if (itemIndex > -1) {
-        return res.json({ status: 422, text: "already added to cart" });
+        return res.status(422).json({ status: 422, text: "The product has already been added to the cart" });
     }
+
     user.cart.push(courseId);
     await user.save();
 
-    res.status(201).json({ status: 201, text: "course added to cart", cart: user.cart });
-}
-
-exports.removeFromCart = async (req, res) => {
-    const { userId, courseId } = req.params
-    if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
-    if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
-
-    const user = await userModel.findById(userId).select("cart").populate({
+    const newUser = await userModel.findById(userId).populate({
         path: "cart",
         populate: {
             path: "teacher",
@@ -127,16 +112,8 @@ exports.removeFromCart = async (req, res) => {
         },
         select: "_id title price discount"
     });
-    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
 
-
-    const findIndex = user.cart.findIndex(item => {
-        return item._id == courseId
-    })
-    user.cart.splice(findIndex, 1)
-    await user.save();
-
-    res.status(200).json({ status: 200, text: "course removed", cart: user.cart });
+    res.status(201).json({ status: 201, text: "course added to cart", user: newUser });
 }
 
 
@@ -181,6 +158,46 @@ exports.login = async (req, res) => {
 }
 
 
+//! Put Request
+exports.editInfo = async (req, res) => {
+    const { params, body } = req;
+    if (!isValidObjectId(params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+
+    const user = await userModel.findById(params.userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    }).populate({
+        path: "favorite",
+        populate: {
+            path: "teacher",
+            select: "_id fullName"
+        },
+        select: "_id title teacher price discount cover"
+    }).select("-password")
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    if (editInfoValidation(body).error) return res.status(422).json({ status: 422, text: editInfoValidation(body).error.message });
+
+    user.fullName = body.fullName;
+    user.email = body.email;
+    if (body.bio.trim() == "") {
+        user.bio = null
+    }
+    else {
+        user.bio = body.bio.trim();
+    }
+    user.gender = body.gender;
+    user.isVisible = body.isVisible;
+
+    await user.save();
+
+    res.status(200).json({ status: 200, text: 'user information has changed', user })
+}
+
 
 
 //! Delete Request
@@ -191,4 +208,31 @@ exports.deleteUser = async (req, res) => {
     if (!user) return res.status(422).json({ text: "user not found" });
 
     res.json({ text: "user deleted successfully" });
+}
+
+exports.removeFromCart = async (req, res) => {
+    const { userId, courseId } = req.params
+    if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
+    if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+    const user = await userModel.findById(userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    });
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    const itemIndex = user.cart.findIndex(item => {
+        return item._id == courseId
+    })
+
+    if (itemIndex == -1) return res.status(422).json({ status: 404, text: "course not found" });
+
+    user.cart.splice(itemIndex, 1);
+    await user.save();
+
+    res.status(200).json({ status: 200, text: "course deleted from cart", user });
 }

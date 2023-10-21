@@ -17,6 +17,17 @@ exports.loginValidation = (data) => {
         password: joi.string().required().trim(),
     })
     return schema.validate(data);
-    
+
 };
 
+
+exports.editInfoValidation = (data) => {
+    const schema = joi.object({
+        fullName: joi.string().required(),
+        email: joi.string().required(),
+        bio: joi.required(),
+        gender: joi.string().required().valid("unknow", "male", "female"),
+        isVisible: joi.boolean().required()
+    })
+    return schema.validate(data);
+}

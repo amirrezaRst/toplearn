@@ -10,28 +10,18 @@ const FavoriteCourse = ({ cart }) => {
                 <header><h1> فاکتور ها </h1></header>
                 <div class="inner form-layer account-orders" style={{ padding: "30px" }}>
 
-                    {cart && cart.length > 0 ?
-                        <table class="table table-striped">
-                            <tbody>
-
-                                <tr>
-                                    <td scope="col">عنوان دوره</td>
-                                    <td scope="col">عملیات</td>
-                                </tr>
-                                {cart.map(item =>
-                                    <tr>
-                                        <td><Link to={`/course/${item._id}`}><span>{item.title}</span></Link></td>
-                                        <td><i className="fas fa-trash-can"></i></td>
-                                    </tr>
-                                )}
-
-                            </tbody>
-                        </table>
-                        : null
-                    }
-
-
-
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td scope="col">عنوان دوره</td>
+                                <td scope="col">عملیات</td>
+                            </tr>
+                            <tr>
+                                <td>آموزش ریاضیات هوش مصنوعی (مقدماتی)</td>
+                                <td><i className="fas fa-trash-can"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                 </div>
 

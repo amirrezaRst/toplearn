@@ -1,13 +1,23 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Breadcrumb from "../common/Breadcrumb";
 
 import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
+import Loading from "../Loading";
+import BasketItem from "./BasketItem";
 
-const Basket = () => {
-
+const Basket = ({ user, setUser }) => {
+    const [loading, setLoading] = useState(true);
     const recaptchaRef = useRef(null);
 
+    useEffect(() => {
+        if (user == null) return setLoading(true);
+        setLoading(false);
+    }, [user])
+
+    if (loading) return (
+        <Loading />
+    )
 
     return (
         <main className="basket-container">
@@ -19,21 +29,14 @@ const Basket = () => {
                     <div className="col-lg-8 col-md-7 col-12" style={{ marginBottom: "40px" }}>
 
                         <div className="basket-course-content">
-                            <div className="course-item">
-                                <div className="course-info" style={{ flexGrow: "1" }}>
-                                    <Link> <h2 className="course-title" style={{ fontSize: "1.15em" }}>آموزش جامع مدل سازی پیشرفته یادگیری عمیق (deep learning) با پایتون</h2></Link>
-                                    <h2 style={{ color: "#686e71" }}>مدرس : امیرحسین ساوه دربندسری</h2>
-                                </div>
-                                <div className="course-info">
-                                    <div className="course-item-discount">
-                                        <h2 style={{ color: "#f66565",fontSize:"0.95em" }}> <del>450,000 تومان</del> </h2>
-                                        <h2 style={{ color: "#9a9da9",fontSize:"0.95em"  }}>10% تخفیف</h2>
-                                        <h2 style={{ color: "#6fc341" }}>450,000 تومان</h2>
-                                    </div>
-                                    <div className="xmark-icon"><i className="fa fa-xmark"></i></div>
-                                </div>
-                            </div>
+
+                            {user.cart.map(course =>
+                                <BasketItem id={course._id} title={course.title} price={course.price} discount={course.discount} teacher={course.teacher.fullName} user={user} setUser={setUser} />
+                            )}
+
+
                         </div>
+
 
                     </div>
                     <aside className="col-lg-4 col-md-5 col-12">

@@ -1692,6 +1692,27 @@ main#home-page {
   font-size: 1.8rem !important;
 }
 
+.course-information-price {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+@media screen and (max-width:991px) {
+  .course-information-price div {
+    flex-flow: row !important;
+  }
+
+  .course-information-price div del {
+    margin-left: 20px;
+  }
+}
+
+.course-information-price div {
+  display: flex;
+  flex-flow: column;
+}
+
 /*? register page */
 #register-container {
   background: #F3F7FA url("/images/pattern.png");
@@ -2499,10 +2520,12 @@ main#home-page {
   -webkit-box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
   padding: 14px 23px;
+  margin-bottom: 35px;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 @media screen and (max-width:800px) {
@@ -2553,6 +2576,50 @@ main#home-page {
   position: absolute;
   top: -14px;
   left: -14px;
-  transform: translateX(50%);
   cursor: pointer;
+}
+
+
+/*! single card styles */
+.course-card:hover .percent-badge p {
+  display: block;
+}
+
+.percent-badge {
+  background: red;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  padding: 1px 15px 1px 8px;
+  border-radius: 0 100px 100px 0;
+  display: flex;
+  color: white;
+  transition: all 3s;
+}
+
+.percent-badge p {
+  margin: 0 10px 0 0;
+  transition: all 3s;
+  display: none;
+}
+
+
+.single-card-price {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-card-price div {
+  display: flex;
+  flex-flow: column;
+}
+
+.single-card-price p {
+  padding: 0 !important;
+  margin: 0;
+}
+
+.single-card-price del {
+  color: #c9302c;
 }
