@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { userModel } = require("../model/userModel");
-const { registerValidation, loginValidation } = require('./validation/userValidation');
+const { registerValidation, loginValidation, editInfoValidation } = require('./validation/userValidation');
 const Joi = require("joi");
 
 
@@ -157,6 +157,46 @@ exports.login = async (req, res) => {
     res.header("Access-Control-Expose-headers", "x-auth-token").header("x-auth-token", token).json({ text: "login successfully", user });
 }
 
+
+//! Put Request
+exports.editInfo = async (req, res) => {
+    const { params, body } = req;
+    if (!isValidObjectId(params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+
+    const user = await userModel.findById(params.userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    }).populate({
+        path: "favorite",
+        populate: {
+            path: "teacher",
+            select: "_id fullName"
+        },
+        select: "_id title teacher price discount cover"
+    }).select("-password")
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    if (editInfoValidation(body).error) return res.status(422).json({ status: 422, text: editInfoValidation(body).error.message });
+
+    user.fullName = body.fullName;
+    user.email = body.email;
+    if (body.bio.trim() == "") {
+        user.bio = null
+    }
+    else {
+        user.bio = body.bio.trim();
+    }
+    user.gender = body.gender;
+    user.isVisible = body.isVisible;
+
+    await user.save();
+
+    res.status(200).json({ status: 200, text: 'user information has changed', user })
+}
 
 
 

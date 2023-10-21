@@ -88,13 +88,27 @@ const Toplearn = () => {
                     <Route path="/teachers" element={<Teachers />} />
                     <Route path="/teachers/:teacherId" element={<TeacherPage courses={courses && courses.length > 0 ? courses : undefined} />} />
 
-                    <Route path="/account/dashboard" element={<AccountLayout><Dashboard /></AccountLayout>} />
-                    <Route path="/account/edit-profile" element={<AccountLayout><EditProfile /></AccountLayout>} />
-                    <Route path="/account/edit-setting" element={<AccountLayout><EditSetting /></AccountLayout>} />
-                    <Route path="/account/edit-password" element={<AccountLayout><EditPassword /></AccountLayout>} />
-                    <Route path="/account/order" element={<AccountLayout><Orders /></AccountLayout>} />
-                    <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse /></AccountLayout>} />
-                    <Route path="/account/consult" element={<AccountLayout><Consult /></AccountLayout>} />
+                    <Route path="/account/dashboard" element={<AccountLayout user={userData}>
+                        <Dashboard user={userData} />
+                    </AccountLayout>} />
+                    <Route path="/account/edit-profile" element={<AccountLayout user={userData}>
+                        <EditProfile user={userData} setUser={setUserData} />
+                    </AccountLayout>} />
+                    <Route path="/account/edit-setting" element={<AccountLayout user={userData}>
+                        <EditSetting />
+                    </AccountLayout>} />
+                    <Route path="/account/edit-password" element={<AccountLayout user={userData}>
+                        <EditPassword />
+                    </AccountLayout>} />
+                    <Route path="/account/order" element={<AccountLayout user={userData}>
+                        <Orders />
+                    </AccountLayout>} />
+                    <Route path="/account/favorite-course" element={<AccountLayout user={userData}>
+                        <FavoriteCourse />
+                    </AccountLayout>} />
+                    <Route path="/account/consult" element={<AccountLayout user={userData}>
+                        <Consult />
+                    </AccountLayout>} />
                     <Route path="/account/basket" element={<Basket user={userData ? userData : null} setUser={setUserData} />} />
 
                     <Route path="*" element={<NotFound />} />
