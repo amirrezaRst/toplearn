@@ -95,7 +95,7 @@ const Toplearn = () => {
                     <Route path="/account/order" element={<AccountLayout><Orders /></AccountLayout>} />
                     <Route path="/account/favorite-course" element={<AccountLayout><FavoriteCourse /></AccountLayout>} />
                     <Route path="/account/consult" element={<AccountLayout><Consult /></AccountLayout>} />
-                    <Route path="/account/basket" element={<Basket />} />
+                    <Route path="/account/basket" element={<Basket user={userData ? userData : null} setUser={setUserData} />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>

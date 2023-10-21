@@ -7,7 +7,10 @@ import config from "../services/config.json";
 const SingleCourseCard = ({ location, id, title, teacher, teacherId, price, courses, cover, special }) => {
 
     const [time, setTime] = useState();
-
+    // const percentage = () => {
+    //     const num = price - ((price / 100) * discount)
+    //     return num
+    // }
     useEffect(() => {
         if (courses != undefined) {
             const second = courses.reduce((total, sec) => {

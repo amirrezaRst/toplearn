@@ -137,8 +137,8 @@ const CoursePage = ({ user, setUser }) => {
                                     : null
                                 }
 
-                                {courseData ?
-                                    <CourseInformation courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
+                                {courseData && user ?
+                                    <CourseInformation courseId={courseData._id} user={user} setUser={setUser} courseLevel={courseData.courseLevel} courseStatus={courseData.courseStatus} courses={courseData.courses}
                                         price={courseData.price} discount={courseData.discount} update={courseData.lastUpdate} license={license} />
                                     : null
                                 }

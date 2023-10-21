@@ -5,18 +5,6 @@ const FavoriteCourse = () => {
                 <header><h1> فاکتور ها </h1></header>
                 <div class="inner form-layer account-orders" style={{ padding: "30px" }}>
 
-                    {/* <table class="table table-bordered">
-                        <tbody>
-                            <tr className="head">
-                                <td scope="col">عنوان دوره</td>
-                                <td scope="col">عملیات</td>
-                            </tr>
-                            <tr>
-                                <td scope="col">1</td>
-                                <td>Mark</td>
-                            </tr>
-                        </tbody>
-                    </table> */}
                     <table class="table table-striped">
                         <tbody>
                             <tr>
@@ -29,8 +17,6 @@ const FavoriteCourse = () => {
                             </tr>
                         </tbody>
                     </table>
-
-
 
                 </div>
 

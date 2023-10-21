@@ -1692,6 +1692,27 @@ main#home-page {
   font-size: 1.8rem !important;
 }
 
+.course-information-price {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+@media screen and (max-width:991px) {
+  .course-information-price div {
+    flex-flow: row !important;
+  }
+
+  .course-information-price div del {
+    margin-left: 20px;
+  }
+}
+
+.course-information-price div {
+  display: flex;
+  flex-flow: column;
+}
+
 /*? register page */
 #register-container {
   background: #F3F7FA url("/images/pattern.png");
@@ -2486,10 +2507,12 @@ main#home-page {
   -webkit-box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
   padding: 14px 23px;
+  margin-bottom: 35px;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 @media screen and (max-width:800px) {
@@ -2540,6 +2563,5 @@ main#home-page {
   position: absolute;
   top: -14px;
   left: -14px;
-  transform: translateX(50%);
   cursor: pointer;
 }

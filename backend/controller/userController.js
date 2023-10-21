@@ -91,13 +91,29 @@ exports.addToCart = async (req, res) => {
     if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
     if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
 
-    const user = await userModel.findById(userId);
+    const user = await userModel.findById(userId).select("cart");
     if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    const itemIndex = user.cart.findIndex(item => {
+        return item._id == courseId;
+    })
+    if (itemIndex > -1) {
+        return res.status(422).json({ status: 422, text: "The product has already been added to the cart" });
+    }
 
     user.cart.push(courseId);
     await user.save();
 
-    res.status(201).json({ status: 201, text: "course added to cart" });
+    const newUser = await userModel.findById(userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    });
+
+    res.status(201).json({ status: 201, text: "course added to cart", user: newUser });
 }
 
 
@@ -152,4 +168,31 @@ exports.deleteUser = async (req, res) => {
     if (!user) return res.status(422).json({ text: "user not found" });
 
     res.json({ text: "user deleted successfully" });
+}
+
+exports.removeFromCart = async (req, res) => {
+    const { userId, courseId } = req.params
+    if (!isValidObjectId(userId)) return res.status(422).json({ status: 422, text: "user id not valid" });
+    if (!isValidObjectId(courseId)) return res.status(422).json({ status: 422, text: "course id is not valid" });
+
+    const user = await userModel.findById(userId).populate({
+        path: "cart",
+        populate: {
+            path: "teacher",
+            select: "fullName"
+        },
+        select: "_id title price discount"
+    });
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    const itemIndex = user.cart.findIndex(item => {
+        return item._id == courseId
+    })
+
+    if (itemIndex == -1) return res.status(422).json({ status: 404, text: "course not found" });
+
+    user.cart.splice(itemIndex, 1);
+    await user.save();
+
+    res.status(200).json({ status: 200, text: "course deleted from cart", user });
 }
