@@ -2565,3 +2565,48 @@ main#home-page {
   left: -14px;
   cursor: pointer;
 }
+
+
+/*! single card styles */
+.course-card:hover .percent-badge p {
+  display: block;
+}
+
+.percent-badge {
+  background: red;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  padding: 1px 15px 1px 8px;
+  border-radius: 0 100px 100px 0;
+  display: flex;
+  color: white;
+  transition: all 3s;
+}
+
+.percent-badge p {
+  margin: 0 10px 0 0;
+  transition: all 3s;
+  display: none;
+}
+
+
+.single-card-price {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-card-price div {
+  display: flex;
+  flex-flow: column;
+}
+
+.single-card-price p {
+  padding: 0 !important;
+  margin: 0;
+}
+
+.single-card-price del {
+  color: #c9302c;
+}

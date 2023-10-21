@@ -10,7 +10,7 @@ router.get("/userList", userList);
 router.get("/singleUser/:id", singleUser);
 router.get("/addToFavorite/:userId/:courseId", [Auth], addToFavorite);
 router.get("/deleteToFavorite/:userId/:courseId", [Auth], deleteToFavorite);
-router.get("/addToCart/:userId/:courseId", [Auth], addToCart)
+router.get("/addToCart/:userId/:courseId", [Auth], addToCart);
 // router.get("/teacherList", teacherList);
 // router.get("/singleTeacher/:id", singleTeacher);
 
