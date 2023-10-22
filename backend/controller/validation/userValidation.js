@@ -39,3 +39,12 @@ exports.editSettingValidation = (data) => {
     })
     return schema.validate(data);
 }
+
+exports.editPasswordValidation = (data) => {
+    const schema = joi.object({
+        currentPassword: joi.string().trim().required(),
+        newPassword: joi.string().trim().required(),
+        repeatPassword: joi.string().trim().required()
+    })
+    return schema.validate(data);
+}

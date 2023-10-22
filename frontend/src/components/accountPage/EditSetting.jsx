@@ -51,7 +51,7 @@ const EditSetting = ({ user, setUser }) => {
             setUser(update)
             Swal.fire({
                 icon: "success",
-                title: "اطلاعات شما با موفقیت تغیر و ثبت شد.",
+                title: "اطلاعات شما با موفقیت تغییر و ثبت شد.",
                 confirmButtonColor: "#7EC857"
             })
         }).catch(err => {

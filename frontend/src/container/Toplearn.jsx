@@ -98,7 +98,7 @@ const Toplearn = () => {
                         <EditSetting user={userData} setUser={setUserData} />
                     </AccountLayout>} />
                     <Route path="/account/edit-password" element={<AccountLayout user={userData}>
-                        <EditPassword />
+                        <EditPassword user={userData} setUser={setUserData} />
                     </AccountLayout>} />
                     <Route path="/account/order" element={<AccountLayout user={userData}>
                         <Orders />

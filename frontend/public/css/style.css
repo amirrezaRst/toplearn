@@ -2202,6 +2202,15 @@ main#home-page {
   padding: 7px 12px;
 }
 
+.edit-profile-form input.not-valid {
+  border: 1px solid red;
+}
+
+.edit-profile-form input.not-valid:focus {
+  outline: none;
+  border: 2px solid rgb(227, 0, 0);
+}
+
 .edit-profile-form input:focus {
   outline: none;
   border: 2px solid #e4ecef;
@@ -2219,6 +2228,14 @@ main#home-page {
   outline: none;
   border: 2px solid #e4ecef;
 }
+
+.edit-profile-form span {
+  color: rgb(220, 0, 0);
+  font-size: .9em;
+}
+
+
+
 
 
 .gender-radio {
@@ -2354,8 +2371,9 @@ main#home-page {
 
 .account-orders tr span {
   color: #333333 !important;
-  transition :color .25s;
+  transition: color .25s;
 }
+
 .account-orders tr span:hover {
   color: #00aad4 !important;
 }

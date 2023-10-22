@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { userModel } = require("../model/userModel");
-const { registerValidation, loginValidation, editInfoValidation, editSettingValidation } = require('./validation/userValidation');
+const { registerValidation, loginValidation, editInfoValidation, editSettingValidation, editPasswordValidation } = require('./validation/userValidation');
 const Joi = require("joi");
 
 
@@ -215,6 +215,25 @@ exports.editSetting = async (req, res) => {
     res.status(200).json({ status: 200, message: "user setting edited" });
 }
 
+exports.editPassword = async (req, res) => {
+    const { params, body } = req;
+    if (!isValidObjectId(params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+
+    const user = await userModel.findById(params.userId).select("password");
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    if (editPasswordValidation(body).error) return res.status(422).json({ status: 422, message: editPasswordValidation(body).error.message });
+
+    const comparePassword = bcrypt.compareSync(body.currentPassword, user.password);
+    if (!comparePassword) return res.status(422).json({ status: 433, message: "password is not valid" });
+
+    if (body.newPassword != body.repeatPassword) return res.status(422).json({ status: 433, message: "the password is not the same" });
+
+    user.password = bcrypt.hashSync(body.newPassword, bcrypt.genSaltSync(10));
+    await user.save();
+
+    res.status(201).json({ status: 201, message: "password changed successfully" });
+}
 
 
 
