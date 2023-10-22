@@ -31,3 +31,11 @@ exports.editInfoValidation = (data) => {
     })
     return schema.validate(data);
 }
+
+exports.editSettingValidation = (data) => {
+    const schema = joi.object({
+        receiveEmail: joi.boolean().required(),
+        receiveMessage: joi.boolean().required()
+    })
+    return schema.validate(data);
+}

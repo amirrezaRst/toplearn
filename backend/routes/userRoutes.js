@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const Auth = require("../middleware/Auth");
 const AdminAuth = require("../middleware/AdminAuth");
-const { userList, singleUser, register, login, deleteUser, addToFavorite, deleteToFavorite, addToCart, removeFromCart, editInfo } = require('../controller/userController');
+const { userList, singleUser, register, login, deleteUser, addToFavorite, deleteToFavorite, addToCart, removeFromCart, editInfo, editSetting } = require('../controller/userController');
 
 const router = Router();
 
@@ -19,6 +19,7 @@ router.post("/login", login);
 // router.post("/newTeacher", [Auth, AdminAuth], newTeacher);
 
 router.put("/editInfo/:userId", [Auth], editInfo);
+router.put("/editSetting/:userId", [Auth], editSetting)
 
 router.delete("/deleteUser/:id", [Auth, AdminAuth], deleteUser);
 router.delete("/removeFromCart/:userId/:courseId", [Auth], removeFromCart);

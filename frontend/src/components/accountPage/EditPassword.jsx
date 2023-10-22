@@ -1,17 +1,17 @@
 const EditPassword = () => {
+const 
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
     return (
         <div class="col-md-9 col-sm-8 col-xs-12">
             <section class="user-account-content">
                 <header><h1> ویرایش حساب کاربری </h1></header>
                 <div class="inner form-layer" style={{ padding: "30px" }}>
-                    <form action="" method="">
-                        {/* <div class="col-md-7 col-sm-8 col-xs-12">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
-                            <input type="text" class="form-control" placeholder="نام و نام خانوادگی" aria-describedby="username" />
-                        </div>
-                    </div> */}
-
+                    <form action="" method="" onSubmit={e => handleSubmit(e)}>
                         <div className="row">
                             <div class="col-md-12 col-sm-12 col-xs-12" style={{ margin: "0 auto" }}>
 
@@ -37,7 +37,7 @@ const EditPassword = () => {
                                 </div>
 
                             </div>
-                 
+
 
                         </div>
                         <button className="btn btn-success" style={{ marginTop: "30px" }}>ثبت رمز عبور جدید</button>

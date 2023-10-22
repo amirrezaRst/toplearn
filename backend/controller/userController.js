@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { userModel } = require("../model/userModel");
-const { registerValidation, loginValidation, editInfoValidation } = require('./validation/userValidation');
+const { registerValidation, loginValidation, editInfoValidation, editSettingValidation } = require('./validation/userValidation');
 const Joi = require("joi");
 
 
@@ -197,6 +197,25 @@ exports.editInfo = async (req, res) => {
 
     res.status(200).json({ status: 200, text: 'user information has changed', user })
 }
+
+exports.editSetting = async (req, res) => {
+    const { params, body } = req;
+    if (!isValidObjectId(params.userId)) return res.status(422).json({ status: 422, text: "user id is not valid" });
+
+    const user = await userModel.findById(params.userId).select("receiveEmail receiveMessage");
+    if (!user) return res.status(422).json({ status: 404, text: "user not found" });
+
+    if (editSettingValidation(body).error) return res.status(422).json({ status: 422, text: editSettingValidation(body).error.message });
+
+    user.receiveEmail = body.receiveEmail;
+    user.receiveMessage = body.receiveMessage;
+
+    await user.save();
+
+    res.status(200).json({ status: 200, message: "user setting edited" });
+}
+
+
 
 
 
