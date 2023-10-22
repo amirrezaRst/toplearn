@@ -21,6 +21,8 @@ const userSchema = mongoose.Schema({
     bio: { type: String, trim: true, default: null },
     gender: { type: String, enum: ["male", "female", "unknow"], default: "unknow" },
     isVisible: { type: Boolean, default: true },
+    receiveEmail: { type: Boolean, default: true },
+    receiveMessage: { type: Boolean, default: true },
     socialMedia: [socialSchema],
     cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }]
 })

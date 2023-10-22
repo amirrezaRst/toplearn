@@ -36,7 +36,7 @@ const TopNavbar = ({ userData, userLogin }) => {
 
                                     {userData && userLogin == true ?
                                         <div className="loggein ">
-                                            <i className="zmdi zmdi-account"></i><Link style={{ fontSize: "1.7rem" }} to="/account/dashboard"> {userData.fullName} </Link>
+                                            <i className="zmdi zmdi-account"></i><Link style={{ fontSize: "1.7rem",textTransform:"capitalize" }} to="/account/dashboard"> {userData.fullName} </Link>
                                         </div> :
                                         <div className="signin" style={{ fontSize: "1.6rem" }}>
                                             <i className="far fa-user" style={{ fontSize: "1.7rem" }}></i>
